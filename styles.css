@@ -1,0 +1,35 @@
+
+
+* {
+    --background: white;
+    --first-color: #0057a4;
+    --second-color: #ffdb01;
+    --warning-color: rgba(255, 165, 0, 1);
+    --height-title: 13%;
+    --height-data: 87%;
+    --height-total: 100%;
+    --A4-width: 21cm;
+    --A4-height: 29.7cm;
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: "Noto IKEA", "Noto Sans", "Roboto", "Open Sans", system-ui, sans-serif;
+    font-size: 16px;
+}
+
+
+
+
+/* ***** FOOTER STYLES  ***** */
+
+div.footer-version {
+    padding: 0.2em 1em;
+}
+
+div.footer-version p.version {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+/* ***** FOOTER STYLES  ***** */
