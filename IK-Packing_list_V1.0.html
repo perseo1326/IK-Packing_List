@@ -7,15 +7,53 @@
     <link rel="stylesheet" href="styles.css">
     <title>Galex</title>
 </head>
-<body>
+<body class="body">
+
+    <div class="box">
+
     
 
 
-    <div class="footer-version">
-        <!-- Version de la aplicacion -->
-        <p id="version-footer" class="version _ancho-50"> (https://github.com/perseo1326)</p>
-    </div>
+        <!-- Panel Wait Async -->
+        <div class="loading-frame no-visible" id="loading-frame">
+            <div class="loading" >
+                <p id="loading">Cargando...</p>
+            </div>
+        </div>
+        
+        <div class="container-title">
+            <div class="title">
+                <h1 id="title">Generador de Packing List - Galex </h1>
+            </div>
+        </div>
 
+        <div class="start-panel">
+            <div class="content">
+
+                <!-- Button load file -->
+                <div class="element">
+                        <label id="shipment-data-label" class="custom-button" for="shipment-data">Información de Shipments</label>
+                        <input type="file" name="shipment-data" id="shipment-data" class="no-visible">
+                </div>
+
+                <div class="element">
+                    <!-- <textarea name="" id="text" cols="" rows="">Textarea</textarea> -->
+                    <table>
+                        <tbody id="data"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="footer-version no-visible">
+            <!-- Version de la aplicacion -->
+            <p id="version-footer" class="versions"> (https://github.com/perseo1326)</p>
+        </div>
+
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>

@@ -5,8 +5,8 @@
     --first-color: #0057a4;
     --second-color: #ffdb01;
     --warning-color: rgba(255, 165, 0, 1);
-    --height-title: 13%;
-    --height-data: 87%;
+    --height-title: 10%;
+    --height-data: 90%;
     --height-total: 100%;
     --A4-width: 21cm;
     --A4-height: 29.7cm;
@@ -17,8 +17,93 @@
     font-size: 16px;
 }
 
+/* ***** GENERAL STYLES  ***** */
 
+.no-visible {
+    display: none;
+}
 
+.show-print{
+    display: none;
+}
+
+.centrar {
+    text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.margen-bajo-05 {
+    margin-bottom: 0.5em;
+}
+
+.back-1 {
+    background-color: var(--first-color);
+    color: var(--second-color);
+}
+
+/* ***** GENERAL STYLES END ***** */
+
+/* ***** INITIAL SCREEN BOXES STYLES ***** */
+
+html, body.body {
+    height: var(--height-total);
+}
+
+div.box {
+    height: var(--height-total);
+}
+
+div.container-title {
+    height: var(--height-title);
+}
+
+div.start-panel {
+	background-color: lightblue;
+	height: var(--height-data);
+}
+
+/* ***** INITIAL SCREEN BOXES STYLES END ***** */
+
+/* ***** LOADING FRAME ***** */
+
+div.loading-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: 5;
+}
+
+div.loading-frame div.loading {
+	position: relative;
+	background-color: var(--first-color);
+    color: var(--second-color);
+    text-align: center;
+    max-width: 40%;
+    margin : auto;
+    top: 50%;
+	padding: 2rem ;
+    border-radius: 5px;
+    transform: translate(-0%, -50%);
+    -webkit-transform: translate(-0%, -50%);
+}
+
+div.loading p {
+    margin: auto;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+/* ***** LOADING FRAME END ***** */
 
 /* ***** FOOTER STYLES  ***** */
 
@@ -33,3 +118,71 @@ div.footer-version p.version {
 }
 
 /* ***** FOOTER STYLES  ***** */
+
+/* ***** BUTTON STYLES ***** */
+
+label {
+    /* padding: 0.3em; */
+    /* font-size: 1.2em; */
+}
+
+.custom-button {
+    display: block;
+    border: 1px solid var(--first-color);
+    border-radius: 4px;
+	background-color: var(--first-color);
+	color: var(--second-color);
+	cursor: pointer;
+	font-size: 1rem;
+	margin: 0.3rem auto;
+	padding: 0.3rem 0.6rem;
+	text-align: center;
+}
+
+.custom-button:hover {
+    background-color: var(--second-color);
+    color: var(--first-color);
+    border: 1px solid var(--first-color);
+}
+
+/* ***** BUTTON STYLES END ***** */
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+    padding: 0.5em;
+}
+
+div.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto;
+}
+
+div.content div.element {
+    padding: 0 0.5em;
+    background-color: lemonchiffon;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: aquamarine;
+}
+
+table tr td {
+    padding: 0.2em;
+    border: 1px solid gray;
+    background-color: beige;
+}
+
+
+
+div.content textarea {
+    /* width: 20em; */
+    /* height: 10em; */
+}
