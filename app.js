@@ -30,12 +30,22 @@ const shipmentsTotal = document.getElementById("shipments-total");
 const shipmentsClear = document.getElementById("shipments-clear");
 const shipmentsRemove = document.getElementById("shipments-remove");
 
+const BUTTON_CODE_FIRST = "FIRST";
+const BUTTON_CODE_SECOND = "SECOND";
+const BUTTON_CODE_THIRD = "THIRD";
 
+const shipmentsFirst = document.getElementById(BUTTON_CODE_FIRST);
+const shipmentsSecond = document.getElementById(BUTTON_CODE_SECOND);
+const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
 
 const VERSION = "1.0";
 
 const SHOP_CODE_LONG = "Receiver ID ="; // Begins With 406-STO-1";
 const SHOP_CODE_ID = "406-STO-1";
+const CODE_FIRST = 1000;
+const CODE_SECOND = 2000;
+const CODE_THIRD = 3000;
+
 
 // Column name and "number of column"
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
@@ -71,6 +81,10 @@ let shipmentsData = new Map();
 
         showShipmentsData(shipmentsData);
     });
+
+    shipmentsFirst.addEventListener('click', changeShipmentCode );
+    shipmentsSecond.addEventListener('click', changeShipmentCode );
+    shipmentsThird.addEventListener('click', changeShipmentCode );
 
 
     // *********************************************************
@@ -231,6 +245,37 @@ let shipmentsData = new Map();
         return dataMap;
     }
 
+    // *********************************************************
+    function changeShipmentCode() {
+        console.log("changeShipmentCode: ", this );
+
+        switch (this.id) {
+            case BUTTON_CODE_FIRST:
+                writeShipmentCode(CODE_FIRST);
+                break;
+            case BUTTON_CODE_SECOND:
+                writeShipmentCode(CODE_SECOND);
+                break;
+            case BUTTON_CODE_THIRD:
+                writeShipmentCode(CODE_THIRD);
+                break;
+            default:
+                return;
+        }
+        showShipmentsData(shipmentsData);
+    }
+
+    // *********************************************************
+    function writeShipmentCode( code ) {
+        const inputSelected = document.querySelectorAll('input[type=checkbox]:checked');
+
+        inputSelected.forEach( (element) => {
+            // console.log("Element: ", element );
+            shipmentsData.get(element.id).code = code;
+            // console.log("Element: ", shipmentsData.get(element.id).code );
+        });
+        // return shipmentsData;
+    }
 
     // *********************************************************
     // *********************************************************

@@ -1,6 +1,8 @@
 
 
 function showShipmentsData( shipmentsDataMap ){
+    
+    // console.log("SHOW DATA: ", shipmentsDataMap);
 
     shipmentsTotal.innerText = shipmentsDataMap.size;
 
@@ -9,10 +11,11 @@ function showShipmentsData( shipmentsDataMap ){
 
     shipmentsDataMap.forEach( ( row, key ) => {
         
-        // console.log("FILA: ", row);
+        // console.log("FILA: ", key, row);
+        const codeClass = "_" + row.code;
 
-        html += "<tr class='";
-        html += row.isPlants ? "plants" : "";
+        html += "<tr class='" + codeClass;
+        html += row.isPlants ? " plants" : "";
         html += "'>";
         
         html += "<td>";
@@ -23,8 +26,8 @@ function showShipmentsData( shipmentsDataMap ){
         html += row.estimatedArrivalDate.toLocaleString();
         html += "</td>";
         
-        html += "<td>";
-        html += "1000";
+        html += "<td class='centrar'>";
+        html += row.code;
         html += "</td>";
         
         html += "<td class='selection'>";
