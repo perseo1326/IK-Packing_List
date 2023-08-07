@@ -1,13 +1,13 @@
 
 
-function showShipmentsData( trucksInfoArray ){
+function showShipmentsData( shipmentsDataMap ){
+
+    shipmentsTotal.innerText = shipmentsDataMap.size;
 
     dataTable.innerHTML = "";
     let html = "";
 
-    // trucksInfoArray.forEach( ( row ) => {
-    for (let index = 0; index < trucksInfoArray.length; index++) {
-        const row = trucksInfoArray[index];
+    shipmentsDataMap.forEach( ( row, key ) => {
         
         // console.log("FILA: ", row);
 
@@ -16,7 +16,7 @@ function showShipmentsData( trucksInfoArray ){
         html += "'>";
         
         html += "<td>";
-        html += row.shipmentId;
+        html += key;
         html += "</td>";
 
         html += "<td>";
@@ -28,14 +28,14 @@ function showShipmentsData( trucksInfoArray ){
         html += "</td>";
         
         html += "<td class='selection'>";
-        html += '<input type="checkbox" id="' + row.shipmentId + '" class="no-visible" value="';
-        html += index;
+        html += '<input type="checkbox" id="' + key + '" class="no-visible" value="';
+        html += "index";
         html += '" />';
-        html += '<label for="' + row.shipmentId;
+        html += '<label for="' + key;
         html += '"><i class="fa-regular fa-circle-check"></i></label>';
         html += "</td>";
 
         html += "</tr>";
-    }
+    });
     dataTable.innerHTML = html;
 }

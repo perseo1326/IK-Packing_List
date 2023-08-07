@@ -43,8 +43,7 @@ const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
 const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival Date", columnNumber : "" };
 
 
-// let contentData = [];
-let shipmentsData = [];
+let shipmentsData = new Map();
 
 
 
@@ -60,7 +59,17 @@ let shipmentsData = [];
         inputSelected.forEach( element => {
             element.checked = false;
         });
-        // console.log("INPUTS: ", document.querySelectorAll('input[type=checkbox]:checked'));
+    });
+
+    shipmentsRemove.addEventListener('click', () => {
+        const inputSelected = document.querySelectorAll('input[type=checkbox]:checked');
+
+        inputSelected.forEach( ( element ) => {
+            shipmentsData.delete( element.id );
+            console.log( "ELEMENT: ", element );
+        });
+
+        showShipmentsData(shipmentsData);
     });
 
 
@@ -77,8 +86,7 @@ let shipmentsData = [];
         loadFileLabel.innerText = "Información de Shipments";
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
-        // contentData = [];
-        shipmentsData = [];
+        shipmentsData = new Map();
 
 
     }
@@ -100,22 +108,21 @@ let shipmentsData = [];
 
         promiseData.then( (response) => {
             
-            const contentData = validateFile( response );
+            let contentData = validateFile( response );
             console.log("Carga \"" + fileStatus.file.name + "\" Finalizada!", contentData); 
 
-            arrayDataTrucks = getInfoFromGrossData( contentData );
+            contentData = getInfoFromGrossData( contentData );
 
-            arrayDataTrucks = sortTrucksInfo(arrayDataTrucks);
-            // console.log("Array data Trucks: ", arrayDataTrucks);
+            contentData = sortTrucksInfo(contentData);
+            // console.log("Array data Trucks: ", dataTrucksMap);
 
             document.getElementById("button-load-shipments").classList.add("no-visible");
             document.getElementById("shipments-container").classList.remove("no-visible");
             document.getElementById("shipments-commands").classList.remove("no-visible");
-            shipmentsTotal.innerText = arrayDataTrucks.length;
 
-            shipmentsData = arrayDataTrucks;
+            shipmentsData = arrayToMap( contentData );
 
-            showShipmentsData(arrayDataTrucks);
+            showShipmentsData(shipmentsData);
         })
         .catch( (error) => {
             console.log("ERROR:openFile: ", error);
@@ -194,9 +201,9 @@ let shipmentsData = [];
                 // console.log("VALORES ORIGINALES: ", row);
                 // console.log("truckInfoRow = ", row[SHIPMENT_COL.columnNumber ], ESTIMATE_ARRIVAL_DATE, row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
 
-                let truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
                 // console.log("TruckInfo objeto: ", truckInfoRow );
-                arrayData.push(truckInfoRow);
+                arrayData.push( truckInfoRow );
             }
         }
         console.log("Cantidad de filas obtenidas: ", arrayData.length );
@@ -207,11 +214,21 @@ let shipmentsData = [];
     function sortTrucksInfo( arrayData ){
 
         arrayData.sort( ( a, b ) => {
-            // console.log("Fechas: ", a.estimatedArrivalDate, b.estimatedArrivalDate, a.estimatedArrivalDate.getTime() < b.estimatedArrivalDate.getTime() ? -1 : 1  );
             return ( a.estimatedArrivalDate.getTime() < b.estimatedArrivalDate.getTime() ? -1 : 1 );
         });
 
         return arrayData;
+    }
+
+    // *********************************************************
+    function arrayToMap( arrayData ) {
+
+        let dataMap = new Map();
+
+        for (const row of arrayData ) {
+            dataMap.set( row.shipmentId, row );    
+        }
+        return dataMap;
     }
 
 
