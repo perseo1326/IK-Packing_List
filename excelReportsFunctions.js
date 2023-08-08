@@ -16,19 +16,52 @@ class ExcelFileOpen {
 
 // *********************************************************
 
-const EXCEL_MIME_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+const EXCEL_MIME_TYPES = [ "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "application/vnd.ms-excel.sheet.macroEnabled.12" 
+                        ];
 const WORKING_SHEET = "Sheet1";
-
+const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
 
     // *********************************************************
     function validateMymeType(file){
 
+        debugger
+        let isValidExtensionFile = false;
+        let isValidMimeType = false;
+
         // check the file type
-        if(file === undefined || (!file.name.toLowerCase().endsWith(".xlsx") && file.type !== EXCEL_MIME_TYPE) ) {
+        if(file === undefined ) {
             console.log("ERROR:readReportsExcel: El archivo \"" + file.name + "\" NO es válido.");
             throw new Error("El archivo \"" + file.name + "\" NO es válido.");
         }
-        console.log("Validado Myme type");
+
+        // check IF the extension file is valid
+        for (const extensionFile of EXTENSION_VALID_FILE ) {
+            if((file.name.toLowerCase().endsWith( extensionFile ))){
+                isValidExtensionFile = true;
+                break;
+            }
+        }
+
+        if(!isValidExtensionFile){
+            console.log("ERROR:validateMymeType: La extensión del archivo no se reconoce como válida.");
+            throw new Error("La extensión del archivo no se reconoce como válida.");
+        }
+
+        // check for MIME type valid
+        for (const mimeType of EXCEL_MIME_TYPES ) {
+            if((file.type === mimeType )){
+                isValidMimeType = true;
+                break;
+            }
+        }
+
+        if(!isValidMimeType){
+            console.log("ERROR:validateMymeType: El tipo de archivo MIME no se reconoce como válido.");
+            throw new Error("El tipo de archivo MIME no se reconoce como válido.");
+        }
+
+        console.log("Validado Myme type y extensión del archivo.");
     }
 
     
