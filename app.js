@@ -108,13 +108,11 @@ let shipmentsData = new Map();
     // *********************************************************
     // Function to read a selected file
     function openTrucksInfoFile(evento) {
-        
-        let arrayDataTrucks = [];
 
-        let file = evento.target.files[0];
+        const file = evento.target.files[0];
         loadingFrame.classList.remove("no-visible");
 
-        let fileStatus = new ExcelFileOpen(file);
+        const fileStatus = new ExcelFileOpen(file);
 
         loadFileLabel.innerText = fileStatus.file.name;
 
@@ -133,6 +131,7 @@ let shipmentsData = new Map();
             document.getElementById("button-load-shipments").classList.add("no-visible");
             document.getElementById("shipments-container").classList.remove("no-visible");
             document.getElementById("shipments-commands").classList.remove("no-visible");
+            document.getElementById("box").classList.remove("box");
 
             shipmentsData = arrayToMap( contentData );
 
