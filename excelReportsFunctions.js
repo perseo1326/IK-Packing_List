@@ -14,59 +14,10 @@ class ExcelFileOpen {
     }
 }
 
+// *********************************************************
 
 const EXCEL_MIME_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 const WORKING_SHEET = "Sheet1";
-
-
-
-    // *********************************************************
-    // Verify the valid structure of data readed from the file based on the headers of info
-    function validateContentExcel(dataRows) {
-        
-        // if(dataRows === undefined || dataRows.length <= 0 ) {
-        //     return false;
-        // }
-
-        // if(dataRows[0][ORDER_TYPE] === undefined || 
-        //     dataRows[0][PICK_AREA] === undefined ||
-        //     dataRows[0][CUT_OFF_DATE] === undefined ||
-        //     dataRows[dataRows.length - 1][CUT_OFF_TIME] === undefined ||
-        //     dataRows[dataRows.length - 1][ISELL] === undefined) {
-        //     return false;
-        // }
-    
-        // return true;
-    }
-
-
-    // *********************************************************
-    // Check and remove all elements with "Order Type" different that "PUP"
-    function filterOrdersByDate(dataArray, textDate) {
-        // return dataArray.filter( (row) => { 
-        //     return row[CUT_OFF_DATE].trim() === textDate;
-        // } );
-    }
-    
-
-    // *********************************************************
-    function readReportsExcel(file, fileDataArray) {
-
-        let excelDataArray = fileDataArray;
-
-        // // check the file type
-        // if(file === undefined || (!file.name.toLowerCase().endsWith(".xlsx") && file.type !== EXCEL_MIME_TYPE) ) {
-        //     console.log("ERROR:readReportsExcel: El archivo \"" + file.name + "\" NO es válido.");
-        //     throw new Error("El archivo \"" + file.name + "\" NO es válido.");
-        // }
-
-        // Validate the format of the file and data structure
-        if(!validateContentExcel(excelDataArray)) {
-            console.log("ERROR:readReportsExcel: Contenido del archivo NO válido.");
-            throw new Error("Contenido del archivo NO válido.");
-        }
-        return excelDataArray;
-    }
 
 
     // *********************************************************
