@@ -3,31 +3,38 @@
 
 class ExcelFileOpen {
 
-    constructor(pointerFile) {
+    constructor(pointerFile, fileExtensionArray, workingSheet, mimeTypeArray ) {
         if(!pointerFile) {
             console.log("ERROR:ExcelFileOpen: No se ha seleccionado ningun archivo.");
             throw new Error("No se ha seleccionado ningun archivo.");
         }
 
         this.file = pointerFile;
-        this.contentFile = "";
+        this.fileExtensionArray = fileExtensionArray;
+        this.workingSheet = workingSheet;
+        this.mimeTypeArray = mimeTypeArray;
     }
 }
 
 // *********************************************************
+// The following lines are an example about how to communicate the needed values and his format.
+// Multiple Mime Types and file extension are allowed for check validity of a single file.
+
+// EXCEL_MIME_TYPES[0] = excel mime type for truck shipments format
+// EXCEL_MIME_TYPES[1] = excel mime type for report 'OR130'
 
 const EXCEL_MIME_TYPES = [ "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            "application/vnd.ms-excel.sheet.macroEnabled.12" 
-                        ];
+                            "application/vnd.ms-excel.sheet.macroEnabled.12" ];
 const WORKING_SHEET = "Sheet1";
 const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
 
     // *********************************************************
     function validateMymeType(file){
 
-        debugger
         let isValidExtensionFile = false;
         let isValidMimeType = false;
+
+        console.log("FILE: ", this );
 
         // check the file type
         if(file === undefined ) {

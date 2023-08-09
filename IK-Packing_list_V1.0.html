@@ -34,7 +34,6 @@
                 </div>
 
                 <div id="shipments-container" class="element no-visible">
-                    <!-- <textarea name="" id="text" cols="" rows="">Textarea</textarea> -->
                     <table>
                         <tr class="">
                             <th>Shipment ID</th>
@@ -58,6 +57,10 @@
                         <button id="shipments-remove" class="custom-button">Remover Shipment</button>
                         <button id="shipments-clear" class="custom-button">Limpiar Selección</button>
                     </div>
+                    <div class="report-load">
+                        <label id="" class="custom-button" for="report-load">Cargar Reporte 'OR130'</label>
+                        <input type="file" name="report-load" id="report-load" class="no-visible">
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,6 +80,7 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="./excelReportsFunctions.js"></script>
     <script src="./viewFunctions.js"></script>
-    <script src="./app.js"></script>
+    <script src="./shipments.js"></script>
+    <script src="./report.js"></script>
 </body>
 </html>

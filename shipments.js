@@ -40,6 +40,13 @@ const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
 
 const VERSION = "1.0";
 
+// Excel shipments file manipulation values
+const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
+const SHIPMENTS_FILE_WORKBOOK_SHEET = "Sheet1";
+const SHIPMENTS_FILE_MYME_TYPE_ARRAY = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+"];
+// TODO: hacer dinamico el validado del archivo pasando los valores al momento de la creacion del objeto 
+
 const SHOP_CODE_LONG = "Receiver ID ="; // Begins With 406-STO-1";
 const SHOP_CODE_ID = "406-STO-1";
 const CODE_FIRST = 1000;
@@ -112,7 +119,7 @@ let shipmentsData = new Map();
         const file = evento.target.files[0];
         loadingFrame.classList.remove("no-visible");
 
-        const fileStatus = new ExcelFileOpen(file);
+        const fileStatus = new ExcelFileOpen(file, ["xlsx"], );
 
         loadFileLabel.innerText = fileStatus.file.name;
 
@@ -120,10 +127,10 @@ let shipmentsData = new Map();
 
         promiseData.then( (response) => {
             
-            let contentData = validateFile( response );
+            let contentData = validateShipmentsFile( response );
             console.log("Carga \"" + fileStatus.file.name + "\" Finalizada!", contentData); 
 
-            contentData = getInfoFromGrossData( contentData );
+            contentData = getShipmentsInfoFromGrossData( contentData );
 
             contentData = sortTrucksInfo(contentData);
             // console.log("Array data Trucks: ", dataTrucksMap);
@@ -148,7 +155,7 @@ let shipmentsData = new Map();
     }
 
     // *********************************************************
-    function validateFile(grossExcelData) {
+    function validateShipmentsFile(grossExcelData) {
 
         let shipmentId = false;
         let receiver = false;
@@ -203,7 +210,7 @@ let shipmentsData = new Map();
     }
 
     // *********************************************************
-    function getInfoFromGrossData( grossDataArray ){
+    function getShipmentsInfoFromGrossData( grossDataArray ){
 
         const arrayData = [];
 
@@ -229,7 +236,6 @@ let shipmentsData = new Map();
         arrayData.sort( ( a, b ) => {
             return ( a.estimatedArrivalDate.getTime() < b.estimatedArrivalDate.getTime() ? -1 : 1 );
         });
-
         return arrayData;
     }
 
@@ -267,13 +273,9 @@ let shipmentsData = new Map();
     // *********************************************************
     function writeShipmentCode( code ) {
         const inputSelected = document.querySelectorAll('input[type=checkbox]:checked');
-
         inputSelected.forEach( (element) => {
-            // console.log("Element: ", element );
             shipmentsData.get(element.id).code = code;
-            // console.log("Element: ", shipmentsData.get(element.id).code );
         });
-        // return shipmentsData;
     }
 
     // *********************************************************

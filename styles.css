@@ -124,11 +124,6 @@ div.footer-version p.version {
 
 /* ***** BUTTON STYLES ***** */
 
-label {
-    /* padding: 0.3em; */
-    /* font-size: 1.2em; */
-}
-
 .custom-button {
     display: block;
     border: 1px solid var(--first-color);
@@ -175,7 +170,7 @@ div.content div.element {
     
 }
 
-    /* ***** SECTIONS AND CONTENT END - Shipments Table ***** */
+    /* ***** SECTIONS AND CONTENT - Shipments Table ***** */
 
     table {
         width: 100%;
@@ -188,8 +183,6 @@ div.content div.element {
         color: var(--second-color);
         font-weight: bold;
         padding: 0.5em;
-        /* border-top-right-radius: 4px; */
-        /* border-top-left-radius: 4px; */
     }
 
     table tbody#shipments tr:hover {
@@ -235,7 +228,7 @@ div.content div.element {
         background-color: var(--warning-color);
     }
 
-    /* ***** SECTIONS AND CONTENT END - Shipments Commands ***** */
+    /* ***** SECTIONS AND CONTENT - Shipments Commands ***** */
 
 
     div.content div.element div.shipments-commands {
@@ -265,8 +258,11 @@ div.content div.element {
         color: black;
     }
 
+    /* ***** SECTIONS AND CONTENT - Report OR130  ***** */
 
-
+    div.report-load {
+        margin-top: 2em;
+    }
 
 /* ***** SECTIONS AND CONTENT END ***** */
 
