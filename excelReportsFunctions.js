@@ -23,28 +23,28 @@ class ExcelFileOpen {
 // EXCEL_MIME_TYPES[0] = excel mime type for truck shipments format
 // EXCEL_MIME_TYPES[1] = excel mime type for report 'OR130'
 
-const EXCEL_MIME_TYPES = [ "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            "application/vnd.ms-excel.sheet.macroEnabled.12" ];
-const WORKING_SHEET = "Sheet1";
-const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
+// const EXCEL_MIME_TYPES = [ "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            // "application/vnd.ms-excel.sheet.macroEnabled.12" ];
+// const WORKING_SHEET = "Sheet1";
+// const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
 
     // *********************************************************
-    function validateMymeType(file){
+    function validateMymeType(ExcelMetadata){
 
         let isValidExtensionFile = false;
         let isValidMimeType = false;
 
-        console.log("FILE: ", this );
+        console.log("FILE: ", ExcelMetadata );
 
         // check the file type
-        if(file === undefined ) {
-            console.log("ERROR:readReportsExcel: El archivo \"" + file.name + "\" NO es válido.");
-            throw new Error("El archivo \"" + file.name + "\" NO es válido.");
+        if(ExcelMetadata.file === undefined ) {
+            console.log("ERROR:readReportsExcel: El archivo \"" + ExcelMetadata.file.name + "\" NO es válido.");
+            throw new Error("El archivo \"" + ExcelMetadata.file.name + "\" NO es válido.");
         }
 
         // check IF the extension file is valid
-        for (const extensionFile of EXTENSION_VALID_FILE ) {
-            if((file.name.toLowerCase().endsWith( extensionFile ))){
+        for (const extensionFile of ExcelMetadata.fileExtensionArray ) {
+            if((ExcelMetadata.file.name.toLowerCase().endsWith( extensionFile ))){
                 isValidExtensionFile = true;
                 break;
             }
@@ -56,8 +56,8 @@ const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
         }
 
         // check for MIME type valid
-        for (const mimeType of EXCEL_MIME_TYPES ) {
-            if((file.type === mimeType )){
+        for (const mimeType of ExcelMetadata.mimeTypeArray ) {
+            if((ExcelMetadata.file.type === mimeType )){
                 isValidMimeType = true;
                 break;
             }
@@ -67,7 +67,6 @@ const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
             console.log("ERROR:validateMymeType: El tipo de archivo MIME no se reconoce como válido.");
             throw new Error("El tipo de archivo MIME no se reconoce como válido.");
         }
-
         console.log("Validado Myme type y extensión del archivo.");
     }
 
@@ -86,7 +85,7 @@ const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
             const sheet_to_row_object_array = "sheet_to_row_object_array";
             const Sheets = "Sheets";
                 
-            validateMymeType(excelFile.file);
+            validateMymeType(excelFile);
             
             fileReader.readAsArrayBuffer(excelFile.file);
             fileReader.onload = function(){
@@ -94,7 +93,7 @@ const EXTENSION_VALID_FILE = [ "xlsx", "xlsm", "xls" ];
                 try {
                     let buffer = this.result;
                     let workbook =  XLSX[read](buffer);
-                    let contentExcelFile = XLSX[utils][sheet_to_row_object_array](workbook[Sheets][WORKING_SHEET]);
+                    let contentExcelFile = XLSX[utils][sheet_to_row_object_array](workbook[Sheets][excelFile.workingSheet]);
                     
                     resolve(contentExcelFile);
                     
