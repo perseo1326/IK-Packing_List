@@ -15,9 +15,9 @@ class TruckInfo {
         this.estimatedArrivalDate = new Date( splitDate[2], (splitDate[1] - 1), splitDate[0], splitTime[0], splitTime[1] );
         this.isPlants = (splitTime[0] == 10 ? true : false );
         this.code = 0;
-        // console.log("Creando Fechas: ", text, "NUEVA: ", this.estimatedArrivalDate.toLocaleString());
     }
 }
+
 
 const footerVersion = document.getElementById("version-footer");
 const shipmentData = document.getElementById("shipment-data");
