@@ -34,8 +34,6 @@ class ExcelFileOpen {
         let isValidExtensionFile = false;
         let isValidMimeType = false;
 
-        console.log("FILE: ", ExcelMetadata );
-
         // check the file type
         if(ExcelMetadata.file === undefined ) {
             console.log("ERROR:readReportsExcel: El archivo \"" + ExcelMetadata.file.name + "\" NO es válido.");

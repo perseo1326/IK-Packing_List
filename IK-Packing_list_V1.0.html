@@ -25,12 +25,12 @@
         </div>
 
         <div class="start-panel">
-            <div class="content">
+            <div id="shipments-content" class="content">
 
                 <!-- Button load file -->
                 <div id="button-load-shipments" class="element">
-                        <label id="shipment-data-label" class="custom-button" for="shipment-data">Información de Shipments</label>
-                        <input type="file" name="shipment-data" id="shipment-data" class="no-visible">
+                        <label id="shipments-data-label" class="custom-button" for="shipments-data">Información de Shipments</label>
+                        <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
                 </div>
 
                 <div id="shipments-container" class="element no-visible">
@@ -58,12 +58,111 @@
                         <button id="shipments-clear" class="custom-button">Limpiar Selección</button>
                     </div>
                     <div class="report-load">
-                        <label id="" class="custom-button" for="report-load">Cargar Reporte 'OR130'</label>
+                        <label id="" class="custom-button" for="report-load"><strong>Continuar</strong><br> Cargar Reporte 'OR130'</label>
                         <input type="file" name="report-load" id="report-load" class="no-visible">
                     </div>
                 </div>
             </div>
+            
+            <div id="report-content" class="no-visible content">
+
+                <!-- Card for Packing List -->
+                <div id="card-packing-list" class="element">
+                    <div class="card">
+                        <div>
+                            <h3 class="centrar">Packing List</h3>
+                        </div>
+                        <div class="card-content">
+                            <i class="fa-regular fa-circle-play"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card for OR130 Report -->
+                <div id="card-report" class="element">
+                    <div class="card">
+                        <div>
+                            <h3 class="centrar">Reporte OR130 </h3>
+                            <h4 class="centrar">(Reducido)</h4>
+                        </div>
+                        <div class="card-content">
+                            <i class="fa-regular fa-circle-play"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="loading-frame no-visible" id="report-frame">
+                    
+                    <!-- Close button -->
+                    <div id="close-report-frame" class="close-report-frame">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                    </div>
+
+                    <!-- copy data button -->
+                    <div class="copy-report-button">
+
+                        <!-- copy packing list button -->
+                        <div id="copy-packing-list-button" class="no-visible_">
+                            <label class="custom-button">
+                                <i class="fa-regular fa-copy"></i>
+                            </label>
+                        </div>
+
+                        <!-- copy OR130 code 1000 report -->
+                        <div id="copy-report-button" class="no-visible_">
+                            <label class="custom-button">
+                                <i class="fa-regular fa-copy"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="packing-list-panel" class="report-panel no-visible" >
+                        
+                        <!-- Packing List Data -->
+                        <div class="">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Referencia</th>
+                                        <th>Código</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="packing-list-data">
+
+                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="report-panel" class="report-panel no-visible">
+                        <!-- Report Data -->
+                        <div class="">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Referencia</th>
+                                        <th>Código</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="report-data">
+
+                                    <tr><td>12345678</td><td>2023</td></tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
+
+
 
 
 

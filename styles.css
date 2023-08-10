@@ -13,6 +13,8 @@
     --height-total: 100%;
     --A4-width: 21cm;
     --A4-height: 29.7cm;
+    --button-copy-packing-list: 'Copiar Packing List';
+    --button-copy-OR130-report: 'Copiar "OR130"';
     margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -23,7 +25,7 @@
 /* ***** GENERAL STYLES  ***** */
 
 .no-visible {
-    display: none;
+    display: none !important;
 }
 
 .show-print{
@@ -68,7 +70,7 @@ div.container-title {
 }
 
 div.start-panel {
-	background-color: lightblue;
+	/* background-color: lightgoldenrodyellow; */
 	height: var(--height-data);
 }
 
@@ -265,4 +267,131 @@ div.content div.element {
     }
 
 /* ***** SECTIONS AND CONTENT END ***** */
+
+
+/* ***** 2th PART REPORT CONTENT ***** */
+
+    div.element div.card {
+        background-color: lightblue;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 4px;
+        padding: 0.5em 1em;
+        height: 15em;
+        width: 12em;
+        cursor: pointer;
+    }
+
+    div.element div.card:hover {
+        background-color: var(--first-color);
+        color: var(--second-color);
+    }
+
+
+    div.element div.card div h3 {
+        font-size: 1.17em;
+        /* background-color: salmon; */
+        padding: 0.3em 0;
+    }
+
+    div.element div.card div.card-content {
+        /* background-color: orange; */
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div.element div.card div.card-content i {
+        display: block;
+        font-size: 3em;
+        color: var(--first-color);
+    }
+    
+    div.element div.card:hover div.card-content i {
+        color: var(--second-color);
+    }
+
+/* ***** 2th PART REPORT CONTENT - Panel frame ***** */
+
+    /* close button :right up corner */
+    div#report-frame div.close-report-frame {
+        position: absolute;
+        top: 3em;
+        right: 3em;
+    }
+
+    div#report-frame div.close-report-frame i {
+        color: var(--first-color);
+        font-size: 2em;
+    }
+
+    div#report-frame div.close-report-frame:hover i {
+        font-weight: bolder;
+    }
+    
+    /* close button :right up corner END */
+
+    /* copy button :right down corner */
+
+    div#report-content div.copy-report-button {
+        position: absolute;
+        right: 3em;
+        bottom: 3em;
+        z-index: 5;
+    }
+    
+    div#report-content div.copy-report-button div {
+        padding: 0.2em;
+    }
+
+    /* copy button packing list */
+    div#report-content div.copy-report-button div#copy-packing-list-button:hover label::before {
+        content: var(--button-copy-packing-list);
+    }
+
+    /* copy button OR130 report  */
+    div#report-content div.copy-report-button div#copy-report-button:hover label::before {
+        content: var(--button-copy-OR130-report);
+    }
+
+    div#report-content div.copy-report-button div label i {
+        font-size: 1.3em;
+    }
+
+    /* copy button :right down corner END */
+    /* ***** 2th PART REPORT CONTENT - Results Panel ***** */
+
+    div#report-frame div.report-panel {
+        /* background-color: slategray; */
+        position: relative;
+        /* max-width: 90%; */
+        margin : auto;
+        top: 50%;
+        padding: 0.5rem ;
+        border-radius: 5px;
+        transform: translate(-0%, -50%);
+        -webkit-transform: translate(-0%, -50%);
+    }
+    
+    /* ***** 2th PART REPORT CONTENT - Results Panel END ***** */
+    
+    /* ***** 2th PART REPORT CONTENT - Packing list Panel ***** */
+    
+    div#report-frame div#packing-list-panel {
+        background-color: red;
+        width: 50%;
+        overflow-y: auto;
+    }
+    
+    /* ***** 2th PART REPORT CONTENT - Report Panel ***** */
+
+    div#report-frame div#report-panel {
+        background-color: orange;
+        width: 95%;
+        overflow: auto;
+    }
+/* ***** 2th PART REPORT CONTENT END ***** */
 
