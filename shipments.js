@@ -20,10 +20,10 @@ class TruckInfo {
 
 
 const footerVersion = document.getElementById("version-footer");
-const shipmentData = document.getElementById("shipment-data");
+const shipments = document.getElementById("shipments-data");
 
 const loadingFrame = document.getElementById("loading-frame");
-const loadFileLabel = document.getElementById("shipment-data-label");
+const loadFileLabel = document.getElementById("shipments-data-label");
 
 const dataTable = document.getElementById("shipments");
 const shipmentsTotal = document.getElementById("shipments-total");
@@ -43,9 +43,7 @@ const VERSION = "1.0";
 // Excel shipments file manipulation values
 const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
 const SHIPMENTS_FILE_WORKBOOK_SHEET = "Sheet1";
-const SHIPMENTS_FILE_MYME_TYPE_ARRAY = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-"];
-// TODO: hacer dinamico el validado del archivo pasando los valores al momento de la creacion del objeto 
+const SHIPMENTS_FILE_MYME_TYPE_ARRAY = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
 
 const SHOP_CODE_LONG = "Receiver ID ="; // Begins With 406-STO-1";
 const SHOP_CODE_ID = "406-STO-1";
@@ -68,7 +66,7 @@ let shipmentsData = new Map();
     // *********************************************************
     // Event Listeners
 
-    shipmentData.addEventListener('change', openTrucksInfoFile );
+    shipments.addEventListener('change', openTrucksInfoFile );
 
     shipmentsClear.addEventListener('click', () => {
         const inputSelected = document.querySelectorAll('input[type=checkbox]:checked');
@@ -83,7 +81,6 @@ let shipmentsData = new Map();
 
         inputSelected.forEach( ( element ) => {
             shipmentsData.delete( element.id );
-            console.log( "ELEMENT: ", element );
         });
 
         showShipmentsData(shipmentsData);
@@ -119,7 +116,7 @@ let shipmentsData = new Map();
         const file = evento.target.files[0];
         loadingFrame.classList.remove("no-visible");
 
-        const fileStatus = new ExcelFileOpen(file, ["xlsx"], );
+        const fileStatus = new ExcelFileOpen(file, SHIPMENTS_FILE_EXTENSION_ARRAY, SHIPMENTS_FILE_WORKBOOK_SHEET, SHIPMENTS_FILE_MYME_TYPE_ARRAY );
 
         loadFileLabel.innerText = fileStatus.file.name;
 
@@ -133,7 +130,6 @@ let shipmentsData = new Map();
             contentData = getShipmentsInfoFromGrossData( contentData );
 
             contentData = sortTrucksInfo(contentData);
-            // console.log("Array data Trucks: ", dataTrucksMap);
 
             document.getElementById("button-load-shipments").classList.add("no-visible");
             document.getElementById("shipments-container").classList.remove("no-visible");
@@ -164,7 +160,6 @@ let shipmentsData = new Map();
         let isfirstAppearance = false;
 
         for (const row of grossExcelData) {
-            // console.log("FILA: ", row);
             
             for (const cell in row) {
                 if (Object.hasOwnProperty.call( row, cell)) {
@@ -215,14 +210,9 @@ let shipmentsData = new Map();
         const arrayData = [];
 
         for (const row of grossDataArray) {
-            // console.log("FILA INFO: ", RECEIVER_COL, row[RECEIVER_COL.columnNumber], row[RECEIVER_COL.colName] );
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
 
-                // console.log("VALORES ORIGINALES: ", row);
-                // console.log("truckInfoRow = ", row[SHIPMENT_COL.columnNumber ], ESTIMATE_ARRIVAL_DATE, row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
-
                 const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
-                // console.log("TruckInfo objeto: ", truckInfoRow );
                 arrayData.push( truckInfoRow );
             }
         }
@@ -252,7 +242,6 @@ let shipmentsData = new Map();
 
     // *********************************************************
     function changeShipmentCode() {
-        console.log("changeShipmentCode: ", this );
 
         switch (this.id) {
             case BUTTON_CODE_FIRST:
@@ -276,6 +265,37 @@ let shipmentsData = new Map();
         inputSelected.forEach( (element) => {
             shipmentsData.get(element.id).code = code;
         });
+    }
+
+    // *********************************************************
+    function validateSelectionShipments( shipmentsMap ){
+
+        const shipmentsArray = [];
+        const shipment_1000 = new Map();
+        const shipment_2000 = new Map();
+        const shipment_3000 = new Map();
+
+        shipmentsData.forEach( (shipment, key ) => {
+            switch (shipment.code) {
+                case 1000:
+                    shipment_1000.set( key, shipment );
+                    break;
+                case 2000:
+                    shipment_2000.set( key, shipment );
+                    break;
+                case 3000:
+                    shipment_3000.set( key, shipment );
+                    break;
+                default:
+                    console.log("ERROR:validateSelectionShipments: Por favor revise su selección de shipments y elimine los que no use.");
+                    throw new Error("Por favor revise su selección de shipments y elimine los que no use.");
+            }
+        });
+        shipmentsArray.push(shipment_1000);
+        shipmentsArray.push(shipment_2000);
+        shipmentsArray.push(shipment_3000);
+        
+        return shipmentsArray;
     }
 
     // *********************************************************
