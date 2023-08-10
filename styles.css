@@ -383,7 +383,7 @@ div.content div.element {
     div#report-frame div#packing-list-panel {
         background-color: red;
         width: 50%;
-        overflow-y: auto;
+        overflow-y: scroll;
     }
     
     /* ***** 2th PART REPORT CONTENT - Report Panel ***** */

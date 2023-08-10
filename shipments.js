@@ -59,7 +59,7 @@ const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival Date", columnNumber
 
 
 let shipmentsData = new Map();
-
+let shipmentsArrayMap = new Map();
 
 
 
@@ -105,6 +105,8 @@ let shipmentsData = new Map();
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
         shipmentsData = new Map();
+        shipmentsArrayMap = new Map();
+
 
 
     }

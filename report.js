@@ -19,8 +19,12 @@ const reportFrame = document.getElementById("report-frame");
 
 const cardPackingList = document.getElementById("card-packing-list");
 const cardReport = document.getElementById("card-report");
+const copyPackingListButton = document.getElementById("copy-packing-list-button");
+const packingListPanel = document.getElementById("packing-list-panel");
+const packingListData = document.getElementById("packing-list-data");
 
-
+let contentDataReport = [];
+let packingListArray = [];
 
 
 // *********************************************************
@@ -31,10 +35,8 @@ closeReportFrame.addEventListener('click', () => {
     reportFrame.classList.add("no-visible");
 });
 
-cardPackingList.addEventListener('click', () => {
-    reportFrame.classList.remove("no-visible");
-    console.log("Click en card packing list");
-});
+cardPackingList.addEventListener('click', packingListReport );
+
 
 
 
@@ -51,7 +53,7 @@ cardPackingList.addEventListener('click', () => {
         try {
             
             // validate the user selection for the shipments
-            const shipmentsArrayMap = validateSelectionShipments( shipmentsData );
+            shipmentsArrayMap = validateSelectionShipments( shipmentsData );
 
             const file = evento.target.files[0];
             loadingFrame.classList.remove("no-visible");
@@ -65,21 +67,15 @@ cardPackingList.addEventListener('click', () => {
                 let contentData = validateReportFile( response, FIELDS_TO_VALIDATE );
                 console.log("Carga \"" + excelFile.file.name + "\" Finalizada!", contentData); 
 
-                contentData = removeBackflowRows( contentData );
-
-                const packingListMap = createPackingListMap( shipmentsArrayMap, contentData );
-
-                // contentData = sortTrucksInfo(contentData);
-                console.log("REPORTE: ", packingListMap);
+                contentDataReport = removeBackflowRows( contentData );
 
 
-                // shipmentsData = arrayToMap( contentData );
+
+
 
                 document.getElementById("box").classList.add("box");
                 document.getElementById("shipments-content").classList.add("no-visible");
                 document.getElementById("report-content").classList.remove("no-visible");
-
-                // showShipmentsData(shipmentsData);
             })
             .catch( (error) => {
                 console.log("ERROR:openFile-Promise: ", error);
@@ -120,6 +116,7 @@ cardPackingList.addEventListener('click', () => {
     // *********************************************************
     function createPackingListMap( shipmentsArray, dataArrayReport){
 
+        // console.log("Shipments: ", shipmentsArray, " Data array report: ", dataArrayReport);
         const packingListArray = [];
         let count = 0;
         
@@ -144,6 +141,23 @@ cardPackingList.addEventListener('click', () => {
         return packingListArray;
     }
 
+    // *********************************************************
+    function packingListReport () {
+
+        // Create Packing List data structure
+        packingListArray = createPackingListMap( shipmentsArrayMap, contentDataReport );
+
+        console.log("Packing List: ", packingListArray);
+        
+        reportFrame.classList.remove("no-visible");
+        copyPackingListButton.classList.remove("no_visible");
+        packingListPanel.classList.remove("no-visible");
+
+        showPackingListData(packingListArray);
+    }
+
+    // *********************************************************
+    
     // *********************************************************
     // *********************************************************
     // *********************************************************
