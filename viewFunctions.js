@@ -60,51 +60,27 @@ function showPackingListData( packListArray) {
     let htmlPack = "";
     let count = 0;
 
-    // for (const shipMap of packListArray) {
-    //     const colorCode = CSS_CLASS_ARRAY[count];
-    //     shipMap.forEach( (shipment, key) => {
-    //         // console.log("Shipment: ", shipment, " Key: ", key);
-    //         htmlPack += "<tr class='centrar ";
-    //         htmlPack += colorCode;
-    //         htmlPack += "'>";
+    for (const shipMap of packListArray) {
+        const colorCode = CSS_CLASS_ARRAY[count];
+        shipMap.forEach( (shipment, key) => {
+            // console.log("Shipment: ", shipment, " Key: ", key);
+            htmlPack += "<tr class='centrar ";
+            htmlPack += colorCode;
+            htmlPack += "'>";
             
-    //         htmlPack += "<td>";
-    //         htmlPack += shipment.reference;
-    //         htmlPack += "</td>";
+            htmlPack += "<td>";
+            htmlPack += shipment.reference;
+            htmlPack += "</td>";
             
-    //         htmlPack += "<td>";
-    //         htmlPack += shipment.code;
-    //         htmlPack += "</td>";
+            htmlPack += "<td>";
+            htmlPack += shipment.code;
+            htmlPack += "</td>";
             
-    //         htmlPack += "</tr>";
+            htmlPack += "</tr>";
 
-    //         if(x++ > 20) {
-    //             packingListData.innerHTML = htmlPack;
-    //             return;
-    //         } 
-    //     });
-    //     count++;
-    // }
-
-    const colorCode = CSS_CLASS_ARRAY[count];
-    for (let i = 0; i < 20; i++) {
-        
-        htmlPack += "<tr class='centrar ";
-        htmlPack += colorCode;
-        htmlPack += "'>";
-        
-        htmlPack += "<td>";
-        htmlPack += "12345678";
-        htmlPack += "</td>";
-        
-        htmlPack += "<td>";
-        htmlPack += "1022";
-        htmlPack += "</td>";
-        
-        htmlPack += "</tr>";
-        
-    }        // console.log("Shipment: ", shipment, " Key: ", key);
-
+        });
+        count++;
+    }
     packingListData.innerHTML = htmlPack;
 }
 

@@ -25,12 +25,14 @@
         </div>
 
         <div class="start-panel">
-            <div id="shipments-content" class="content no-visible">
+            <div id="shipments-content" class="content">
 
                 <!-- Button load file -->
                 <div id="button-load-shipments" class="element">
                         <label id="shipments-data-label" class="custom-button" for="shipments-data">Información de Shipments</label>
                         <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
+
+                        <button id="copy-paste" class="custom-button">Copiar / Pegar portapaleles</button>
                 </div>
 
                 <div id="shipments-container" class="element no-visible">
@@ -64,35 +66,37 @@
                 </div>
             </div>
             
-            <div id="report-content" class="no-visible_ content">
+            <div id="report-content" class="no-visible height-100">
 
-                <!-- Card for Packing List -->
-                <div id="card-packing-list" class="element">
-                    <div class="card">
-                        <div>
-                            <h3 class="centrar">Packing List</h3>
+                <div id="cards-panel" class="content">
+                    <!-- Card for Packing List -->
+                    <div id="card-packing-list" class="element">
+                        <div class="card">
+                            <div>
+                                <h3 class="centrar">Packing List</h3>
+                            </div>
+                            <div class="card-content">
+                                <i class="fa-regular fa-circle-play"></i>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <i class="fa-regular fa-circle-play"></i>
+                    </div>
+                    
+                    <!-- Card for OR130 Report -->
+                    <div id="card-report" class="element">
+                        <div class="card">
+                            <div>
+                                <h3 class="centrar">Reporte OR130 </h3>
+                                <h4 class="centrar">(Reducido)</h4>
+                            </div>
+                            <div class="card-content">
+                                <i class="fa-regular fa-circle-play"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Card for OR130 Report -->
-                <div id="card-report" class="element">
-                    <div class="card">
-                        <div>
-                            <h3 class="centrar">Reporte OR130 </h3>
-                            <h4 class="centrar">(Reducido)</h4>
-                        </div>
-                        <div class="card-content">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                </div>
+                    
 
-
-                <div class="loading-frame no-visible_" id="report-frame">
+                <div class="loading-frame_ no-visible" id="report-frame">
                     
                     <!-- Close button -->
                     <div id="close-report-frame" class="close-report-frame">
@@ -117,7 +121,7 @@
                         </div>
                     </div>
 
-                    <div id="packing-list-panel" class="report-panel no-visible_" >
+                    <div id="packing-list-panel" class="report-panel no-visible" >
                         
                         <!-- Packing List Data -->
                         <div class="">
@@ -129,55 +133,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="packing-list-data">
-
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
-                                    <tr class="centrar"><td>12345678</td><td>2023</td></tr>
 
                                 </tbody>
                             </table>

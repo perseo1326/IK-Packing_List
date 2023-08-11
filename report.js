@@ -33,12 +33,19 @@ let packingListArray = [];
 reportLoadButton.addEventListener('change', openReportFile );
 closeReportFrame.addEventListener('click', () => {
     reportFrame.classList.add("no-visible");
+    document.getElementById("cards-panel").classList.remove("no-visible");
 });
 
 cardPackingList.addEventListener('click', packingListReport );
 
+copyPackingListButton.addEventListener('click', () => {
+    console.log("Click en Copy Packing List button: ");
+    packingListPanel.select();
+});
 
-
+packingListPanel.addEventListener('select', (evento) => {
+    console.log("Evento seleccionar: ", evento );
+})
 
 
 // *********************************************************
@@ -150,14 +157,45 @@ cardPackingList.addEventListener('click', packingListReport );
         console.log("Packing List: ", packingListArray);
         
         reportFrame.classList.remove("no-visible");
-        copyPackingListButton.classList.remove("no_visible");
+        copyPackingListButton.classList.remove("no-visible");
         packingListPanel.classList.remove("no-visible");
+        document.getElementById("cards-panel").classList.add("no-visible");
 
         showPackingListData(packingListArray);
     }
 
     // *********************************************************
+
+    const copyPaste = document.getElementById("copy-paste");
+    copyPaste.addEventListener('click', () => {
+
+        copyClipBoard();
+        // copyToClipboard("una cadena de texto a copiar!!");
+    });
+
+
+    const copyToClipboard = str => {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+            return navigator.clipboard.writeText(str);
+        return Promise.reject("The Clipboard API is not available.");
+        };
+
+
+    function copyClipBoard() {
+
+        console.log("Copy paste function: ", navigator );
+        // navigator.clipboard.readText()
+        // .then(text => {
+        //     console.log('Texto del portapapeles:', text)
+        // })
+        // .catch(err => {
+        //     console.error('Error al leer del portapapeles:', err)
+        // })
     
+
+    
+    }
+
     // *********************************************************
     // *********************************************************
     // *********************************************************
