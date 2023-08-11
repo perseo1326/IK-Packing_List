@@ -19,26 +19,11 @@ class TruckInfo {
 }
 
 
-const footerVersion = document.getElementById("version-footer");
-const shipments = document.getElementById("shipments-data");
-
-const loadingFrame = document.getElementById("loading-frame");
-const loadFileLabel = document.getElementById("shipments-data-label");
-
-const dataTable = document.getElementById("shipments");
-const shipmentsTotal = document.getElementById("shipments-total");
-const shipmentsClear = document.getElementById("shipments-clear");
-const shipmentsRemove = document.getElementById("shipments-remove");
-
-const BUTTON_CODE_FIRST = "FIRST";
-const BUTTON_CODE_SECOND = "SECOND";
-const BUTTON_CODE_THIRD = "THIRD";
-
-const shipmentsFirst = document.getElementById(BUTTON_CODE_FIRST);
-const shipmentsSecond = document.getElementById(BUTTON_CODE_SECOND);
-const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
-
 const VERSION = "1.0";
+
+const titleMain = "Generador Packing List - GALEX";
+const titlePackingListData = "Packing List - Listado";
+const titleReportData = "Reporte OR130 - Reducido";
 
 // Excel shipments file manipulation values
 const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
@@ -56,6 +41,26 @@ const CODE_THIRD = 3000;
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
 const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
 const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival Date", columnNumber : "" };
+
+const BUTTON_CODE_FIRST = "FIRST";
+const BUTTON_CODE_SECOND = "SECOND";
+const BUTTON_CODE_THIRD = "THIRD";
+
+const shipmentsFirst = document.getElementById(BUTTON_CODE_FIRST);
+const shipmentsSecond = document.getElementById(BUTTON_CODE_SECOND);
+const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
+
+const footerVersion = document.getElementById("version-footer");
+const title = document.getElementById("title");
+const shipments = document.getElementById("shipments-data");
+
+const loadingFrame = document.getElementById("loading-frame");
+const loadFileLabel = document.getElementById("shipments-data-label");
+
+const dataTable = document.getElementById("shipments");
+const shipmentsTotal = document.getElementById("shipments-total");
+const shipmentsClear = document.getElementById("shipments-clear");
+const shipmentsRemove = document.getElementById("shipments-remove");
 
 
 let shipmentsData = new Map();
@@ -100,7 +105,7 @@ let shipmentsArrayMap = new Map();
     // Function to initialize the original values
     function initializePage() {
         console.log("Inicializando valores originales...");
-        document.getElementById("title").innerText = document.title = "Generador Packing List - GALEX";
+        document.getElementById("title").innerText = document.title = titleMain;
         loadFileLabel.innerText = "Información de Shipments";
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;

@@ -56,6 +56,7 @@ function showShipmentsData( shipmentsDataMap ){
 // *********************************************************
 function showPackingListData( packListArray) {
 
+    title.innerText = titlePackingListData;
     packingListData.innerHTML = "";
     let htmlPack = "";
     let count = 0;
@@ -84,7 +85,86 @@ function showPackingListData( packListArray) {
     packingListData.innerHTML = htmlPack;
 }
 
+// *********************************************************
+function drawReportTableHeaders() {
 
+    htmlReportHeaders = "";
+
+    htmlReportHeaders += "<tr class='centrar'>";
+    // htmlReportHeaders += "";
+
+    htmlReportHeaders += '<th>' + ARTICLE_NUMBER + '</th>';
+    htmlReportHeaders += '<th>' + ARTICLE_NAME + '</th>';
+    htmlReportHeaders += '<th>' + SALES_METHOD + '</th>';
+    htmlReportHeaders += '<th>' + HFB + '</th>';
+    htmlReportHeaders += '<th>' + PRODUCT_AREA + '</th>';
+    htmlReportHeaders += '<th>' + SLID_P + '</th>';
+    htmlReportHeaders += '<th>' + SLID_H + '</th>';
+    htmlReportHeaders += '<th>' + MSL + '</th>';
+    htmlReportHeaders += '<th>' + WORKAREA + '</th>';
+    htmlReportHeaders += '<th>' + COMPLETE_CAP_INCL_FLEX + '</th>';
+    htmlReportHeaders += '<th>' + TOTAL_QTY_IN_SALES + '</th>';
+    htmlReportHeaders += '<th>' + SGF_STOCK + '</th>';
+    htmlReportHeaders += '<th>' + FROM_LOCATION + '</th>';
+    htmlReportHeaders += '<th>' + TO_LOCATION + '</th>';
+    htmlReportHeaders += '<th>' + MOVED_QTY + '</th>';
+    htmlReportHeaders += '<th>' + FLOWTYPE + '</th>';
+    htmlReportHeaders += '<th>' + FULL_PALLET + '</th>';
+    htmlReportHeaders += '<th>' + SALES_STOP_MARK + '</th>';
+    htmlReportHeaders += '<th>' + SHIPMENT + '</th>';
+    htmlReportHeaders += '<th>' + OPEN_PICK_QTY + '</th>';
+    htmlReportHeaders += '<th>' + NEW_LOC + '</th>';
+    htmlReportHeaders += '<th>' + NEW_CAP + '</th>';
+    htmlReportHeaders += '<th>' + MHS_ID + '</th>';    
+
+    htmlReportHeaders += '</tr>';
+    return htmlReportHeaders;
+}
+// *********************************************************
+function showReportData( dataReportArray ){
+
+    console.log("ShowReportData Array: ", dataReportArray);
+
+    title.innerText = titleReportData;
+    reportTableHeaders.innerHTML = reportData.innerHTML = "";
+    htmlReport = "";
+    
+    // Draw the headers for the report
+    reportTableHeaders.innerHTML = drawReportTableHeaders();
+    
+    dataReportArray.forEach( row => {
+
+        htmlReport += "<tr class='centrar'>";
+        
+        htmlReport += '<td>' + row[ARTICLE_NUMBER] + '</td>';
+        htmlReport += '<td>' + row[ARTICLE_NAME] + '</td>';
+        htmlReport += '<td>' + row[SALES_METHOD] + '</td>';
+        htmlReport += '<td>' + row[HFB] + '</td>';
+        htmlReport += '<td>' + row[PRODUCT_AREA] + '</td>';
+        htmlReport += '<td>' + row[SLID_P] + '</td>';
+        htmlReport += '<td>' + row[SLID_H] + '</td>';
+        htmlReport += '<td>' + row[MSL] + '</td>';
+        htmlReport += '<td>' + row[WORKAREA] + '</td>';
+        htmlReport += '<td>' + row[COMPLETE_CAP_INCL_FLEX] + '</td>';
+        htmlReport += '<td>' + row[TOTAL_QTY_IN_SALES] + '</td>';
+        htmlReport += '<td>' + row[SGF_STOCK] + '</td>';
+        htmlReport += '<td>' + row[FROM_LOCATION] + '</td>';
+        htmlReport += '<td>' + row[TO_LOCATION] + '</td>';
+        htmlReport += '<td>' + row[MOVED_QTY] + '</td>';
+        htmlReport += '<td>' + row[FLOWTYPE] + '</td>';
+        htmlReport += '<td>' + row[FULL_PALLET] + '</td>';
+        htmlReport += '<td>' + row[SALES_STOP_MARK] + '</td>';
+        htmlReport += '<td>' + row[SHIPMENT] + '</td>';
+        htmlReport += '<td>' + row[OPEN_PICK_QTY] + '</td>';
+        htmlReport += '<td>' + row[NEW_LOC] + '</td>';
+        htmlReport += '<td>' + row[NEW_CAP] + '</td>';
+        htmlReport += '<td>' + row[MHS_ID] + '</td>';
+
+        htmlReport += "</tr>";
+    });
+
+    reportData.innerHTML = htmlReport;
+}
 
 // *********************************************************
 // *********************************************************

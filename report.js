@@ -11,6 +11,32 @@ const FROM_LOCATION = "FROM_LOCATION";
 const BACKFLOW = "BACKFLOW";
 const SHIPMENT = "SHIPMENT_NO";
 
+// Headers for OR130 Report sorted by Order of appearance
+// const ARTICLE_NUMBER = 'ARTNO';
+// const ARTICLE_NAME = 'ARTNAME_UNICODE';
+const SALES_METHOD = 'SALESMETHOD';
+const HFB = 'HFB';
+const PRODUCT_AREA = 'PRODUCT_AREA';
+const SLID_P = 'SLID_P';
+const SLID_H = 'SLID_H';
+const MSL = 'MSL';
+const WORKAREA = 'WORKAREA';
+const COMPLETE_CAP_INCL_FLEX = 'COMPLETE_CAP_INCL_FLEX';
+const TOTAL_QTY_IN_SALES = 'TOTAL_QTY_IN_SALES';
+const SGF_STOCK = 'SGF_STOCK';
+// const FROM_LOCATION = 'FROM_LOCATION';
+const TO_LOCATION = 'TO_LOCATION';
+const MOVED_QTY = 'MOVED_QTY';
+const FLOWTYPE = 'FLOWTYPE';
+const FULL_PALLET = 'FULL_PALLET';
+const SALES_STOP_MARK = 'SALES_STOP_MARK';
+// const SHIPMENT = 'SHIPMENT_NO';
+const OPEN_PICK_QTY = 'OPEN_PICK_QTY';
+const NEW_LOC = 'NEW_LOC';
+const NEW_CAP = 'NEW_CAP';
+const MHS_ID = 'MHS_ID';
+
+
 const FIELDS_TO_VALIDATE = [ ARTICLE_NUMBER, ARTICLE_NAME, FROM_LOCATION, SHIPMENT ];
 
 const reportLoadButton = document.getElementById("report-load");
@@ -22,6 +48,10 @@ const cardReport = document.getElementById("card-report");
 const copyPackingListButton = document.getElementById("copy-packing-list-button");
 const packingListPanel = document.getElementById("packing-list-panel");
 const packingListData = document.getElementById("packing-list-data");
+const copyReportButton = document.getElementById("copy-report-button");
+const reportPanel = document.getElementById("report-panel");
+const reportTableHeaders = document.getElementById("report-table-headers");
+const reportData = document.getElementById("report-data");
 
 let contentDataReport = [];
 let packingListArray = [];
@@ -34,6 +64,7 @@ reportLoadButton.addEventListener('change', openReportFile );
 closeReportFrame.addEventListener('click', () => {
     reportFrame.classList.add("no-visible");
     document.getElementById("cards-panel").classList.remove("no-visible");
+    title.innerText = titleMain;
 });
 
 cardPackingList.addEventListener('click', packingListReport );
@@ -42,6 +73,8 @@ copyPackingListButton.addEventListener('click', () => {
     console.log("Click en Copy Packing List button: ");
     packingListPanel.select();
 });
+
+cardReport.addEventListener('click', report_OR130 );
 
 packingListPanel.addEventListener('select', (evento) => {
     console.log("Evento seleccionar: ", evento );
@@ -58,7 +91,6 @@ packingListPanel.addEventListener('select', (evento) => {
     // Function to read a selected file
     function openReportFile(evento) {
         try {
-            
             // validate the user selection for the shipments
             shipmentsArrayMap = validateSelectionShipments( shipmentsData );
 
@@ -109,7 +141,13 @@ packingListPanel.addEventListener('select', (evento) => {
                 throw new Error("El reporte NO tiene estructura válida.");
             }
         }
-        console.log("Reporte válidado correctamente.");
+        console.log("Reporte válidado correctamente.", dataArray);
+
+        dataArray.forEach( row => {
+            let referenceText = String (row[ARTICLE_NUMBER]);
+            row[ARTICLE_NUMBER] = referenceText.padStart( 8, '0' );
+        });
+
         return dataArray;
     }
 
@@ -124,7 +162,7 @@ packingListPanel.addEventListener('select', (evento) => {
     function createPackingListMap( shipmentsArray, dataArrayReport){
 
         // console.log("Shipments: ", shipmentsArray, " Data array report: ", dataArrayReport);
-        const packingListArray = [];
+        const packListArray = [];
         let count = 0;
         
         for (const shipmentsMap of shipmentsArray) {
@@ -142,10 +180,10 @@ packingListPanel.addEventListener('select', (evento) => {
                     packingList.get( refKey ).code++;
                 }
             });
-            packingListArray[count] = packingList;
+            packListArray[count] = packingList;
             count++;
         }
-        return packingListArray;
+        return packListArray;
     }
 
     // *********************************************************
@@ -159,11 +197,52 @@ packingListPanel.addEventListener('select', (evento) => {
         reportFrame.classList.remove("no-visible");
         copyPackingListButton.classList.remove("no-visible");
         packingListPanel.classList.remove("no-visible");
+
+        reportPanel.classList.add("no-visible");
+        copyReportButton.classList.add("no-visible");
         document.getElementById("cards-panel").classList.add("no-visible");
 
         showPackingListData(packingListArray);
     }
 
+    // *********************************************************
+    function createReport_OR130Array( shipmentsMap, dataArray ) {
+
+        console.log("Creando reporte: ", shipmentsMap, dataArray);
+        const reportArray = [];
+        const ship_1000_Map = new Map();
+
+        // filter only shipments with code '1000'
+        shipmentsMap.forEach( (value, key) => {
+            if( value.code === 1000 ){
+                ship_1000_Map.set( key, value );
+            }
+        });
+
+        for (const row of dataArray) {
+            if(ship_1000_Map.has( row[SHIPMENT] )) {
+                reportArray.push(row);
+            }
+        }
+        return reportArray;
+    } 
+
+    // *********************************************************
+    function report_OR130() {
+
+        const reportData = createReport_OR130Array( shipmentsData, contentDataReport );
+        console.log("Report OR130: ", reportData);
+
+        reportFrame.classList.remove("no-visible");
+        copyReportButton.classList.remove("no-visible");
+        reportPanel.classList.remove("no-visible");
+
+        packingListPanel.classList.add("no-visible");
+        copyPackingListButton.classList.add("no-visible");
+        document.getElementById("cards-panel").classList.add("no-visible");
+
+        showReportData( reportData );
+    }
     // *********************************************************
 
     const copyPaste = document.getElementById("copy-paste");
