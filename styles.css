@@ -5,9 +5,9 @@
     --first-color: #0057a4;
     --second-color: #ffdb01;
     --warning-color: rgba(255, 52, 52, 0.8);
-    --_1000-color: #67e167;
-    --_2000-color: #a96cce;
-    --_3000-color: #ffcc68;
+    --_1000-color: #cdf6cd;
+    --_2000-color: #fec89a;
+    --_3000-color: #d2d9ee;
     --height-title: 10%;
     --height-data: 90%;
     --height-total: 100%;
@@ -159,7 +159,7 @@ h1 {
 /* ***** SECTIONS AND CONTENT ***** */
 
 div.content {
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
     display: flex;
     /* flex-direction: column; */
     flex-direction: row;
