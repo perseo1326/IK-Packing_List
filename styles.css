@@ -113,19 +113,6 @@ div.loading p {
 
 /* ***** LOADING FRAME END ***** */
 
-/* ***** FOOTER STYLES  ***** */
-
-div.footer-version {
-    padding: 0.2em 1em;
-}
-
-div.footer-version p.version {
-    text-align: right;
-    font-style: italic;
-    font-size: 0.8em;
-}
-
-/* ***** FOOTER STYLES  ***** */
 
 /* ***** BUTTON STYLES ***** */
 
@@ -153,7 +140,14 @@ div.footer-version p.version {
 h1 {
     text-align: center;
     font-size: 2em;
-    padding: 0.5em;
+    padding: 0.5em 0.5em 0 0.5em;
+}
+
+h6.version {
+    text-align: right;
+    padding: 0 1em;
+    font-weight: lighter;
+    font-size: 0.7em;
 }
 
 /* ***** SECTIONS AND CONTENT ***** */

@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.0";
+const VERSION = "1.1";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
