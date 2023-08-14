@@ -53,6 +53,9 @@ const reportPanel = document.getElementById("report-panel");
 const reportTableHeaders = document.getElementById("report-table-headers");
 const reportData = document.getElementById("report-data");
 
+// node for copy use
+const copyNode = document.getElementById("copy-node");
+
 let contentDataReport = [];
 let packingListArray = [];
 
@@ -245,35 +248,7 @@ packingListPanel.addEventListener('select', (evento) => {
     }
     // *********************************************************
 
-    const copyPaste = document.getElementById("copy-paste");
-    copyPaste.addEventListener('click', () => {
 
-        copyClipBoard();
-        // copyToClipboard("una cadena de texto a copiar!!");
-    });
-
-
-    const copyToClipboard = str => {
-        if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-            return navigator.clipboard.writeText(str);
-        return Promise.reject("The Clipboard API is not available.");
-        };
-
-
-    function copyClipBoard() {
-
-        console.log("Copy paste function: ", navigator );
-        // navigator.clipboard.readText()
-        // .then(text => {
-        //     console.log('Texto del portapapeles:', text)
-        // })
-        // .catch(err => {
-        //     console.error('Error al leer del portapapeles:', err)
-        // })
-    
-
-    
-    }
 
     // *********************************************************
     // *********************************************************

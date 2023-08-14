@@ -95,6 +95,8 @@ let shipmentsArrayMap = new Map();
     shipmentsSecond.addEventListener('click', changeShipmentCode );
     shipmentsThird.addEventListener('click', changeShipmentCode );
 
+    dataTable.addEventListener("click", copyShipment );
+
 
     // *********************************************************
     // *********************************************************
@@ -282,7 +284,7 @@ let shipmentsArrayMap = new Map();
         const shipment_2000 = new Map();
         const shipment_3000 = new Map();
 
-        shipmentsData.forEach( (shipment, key ) => {
+        shipmentsMap.forEach( (shipment, key ) => {
             switch (shipment.code) {
                 case 1000:
                     shipment_1000.set( key, shipment );
@@ -304,6 +306,53 @@ let shipmentsArrayMap = new Map();
         
         return shipmentsArray;
     }
+
+    // *********************************************************
+    function copyShipment( evento ){
+        
+        if(evento.target.nodeName === 'I' ){
+            
+            document.querySelectorAll('label.copy-shipment').forEach( elem => {
+                elem.classList.remove("copy-shipment");
+            });
+
+            const element = evento.target;
+            element.parentNode.classList.add("copy-shipment");
+
+            copyElement( element.parentNode.parentNode.nextSibling );
+
+            setTimeout( () => {
+                element.parentNode.classList.remove("copy-shipment");
+            }, 1000 );
+
+            console.log("RANGOS: ", window.getSelection());
+        }
+    }
+
+    // *********************************************************
+    function copyElement( element ){
+        console.log("ELEMENT: ", element);
+        
+        // clear all selection made before
+        window.getSelection().removeAllRanges();
+
+        let result = false;
+
+        let range = document.createRange();
+        range.selectNode( element );
+        window.getSelection().addRange(range);
+        
+        try {
+            result = document.execCommand('copy');
+            // console.log("Resultado de la copia: ", result );
+        } catch (error) {
+            console.log("ERROR:copyElement: Problema al copiar el elemento.", result);
+            alert("Problema al copiar el elemento.");
+        }
+
+    }
+
+
 
     // *********************************************************
     // *********************************************************

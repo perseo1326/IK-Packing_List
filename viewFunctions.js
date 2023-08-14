@@ -27,11 +27,17 @@ function showShipmentsData( shipmentsDataMap ){
         html += row.isPlants ? " plants" : "";
         html += "'>";
         
+        html += "<td class='selection'>";
+        html += "<label><i id='c-";
+        html += key;
+        html += "' class='fa-regular fa-copy'></i></label>";
+        html += "</td>";
+
         html += "<td>";
         html += key;
         html += "</td>";
 
-        html += "<td>";
+        html += "<td class='centrar'>";
         html += row.estimatedArrivalDate.toLocaleString();
         html += "</td>";
         

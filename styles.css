@@ -190,12 +190,20 @@ div.content div.element {
     }
 
     table tbody#shipments tr td {
-        padding: 0 0.2em;
+        padding: 0 0.4em;
         border: 1px solid gray;
     }
+
+    table tbody#shipments tr td.selection label i {
+        width: 100%;
+        height: 100%;
+    }
     
+    table tbody#shipments tr td.selection label.copy-shipment {
+        background-color: #80ed99;
+    }
+
     table tbody#shipments tr td.selection  {
-        background-color: var(--background);
         cursor: pointer;
         padding: 0;
     }
