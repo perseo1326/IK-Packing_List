@@ -74,14 +74,19 @@ cardPackingList.addEventListener('click', packingListReport );
 
 copyPackingListButton.addEventListener('click', () => {
     console.log("Click en Copy Packing List button: ");
-    packingListPanel.select();
+    copyElement( packingListData );
 });
 
 cardReport.addEventListener('click', report_OR130 );
 
+copyReportButton.addEventListener('click', () => {
+    console.log("Click en Copy Report button: ");
+    copyElement( document.getElementById("report-table-data") );
+});
+
 packingListPanel.addEventListener('select', (evento) => {
     console.log("Evento seleccionar: ", evento );
-})
+});
 
 
 // *********************************************************

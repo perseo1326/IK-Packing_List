@@ -28,9 +28,7 @@ function showShipmentsData( shipmentsDataMap ){
         html += "'>";
         
         html += "<td class='selection'>";
-        html += "<label><i id='c-";
-        html += key;
-        html += "' class='fa-regular fa-copy'></i></label>";
+        html += "<label><i class='fa-regular fa-copy copy-ship'></i></label>";
         html += "</td>";
 
         html += "<td>";
@@ -70,12 +68,13 @@ function showPackingListData( packListArray) {
     for (const shipMap of packListArray) {
         const colorCode = CSS_CLASS_ARRAY[count];
         shipMap.forEach( (shipment, key) => {
+
             // console.log("Shipment: ", shipment, " Key: ", key);
             htmlPack += "<tr class='centrar ";
             htmlPack += colorCode;
             htmlPack += "'>";
             
-            htmlPack += "<td>";
+            htmlPack += "<td >";
             htmlPack += shipment.reference;
             htmlPack += "</td>";
             
@@ -84,7 +83,6 @@ function showPackingListData( packListArray) {
             htmlPack += "</td>";
             
             htmlPack += "</tr>";
-
         });
         count++;
     }

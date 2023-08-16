@@ -310,7 +310,8 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     function copyShipment( evento ){
         
-        if(evento.target.nodeName === 'I' ){
+        if(evento.target.nodeName === 'I' && evento.target.classList.contains("copy-ship") ){
+            console.log("EVENTO: ", evento.target );
             
             document.querySelectorAll('label.copy-shipment').forEach( elem => {
                 elem.classList.remove("copy-shipment");
@@ -324,12 +325,11 @@ let shipmentsArrayMap = new Map();
             setTimeout( () => {
                 element.parentNode.classList.remove("copy-shipment");
             }, 1000 );
-
-            console.log("RANGOS: ", window.getSelection());
         }
     }
 
     // *********************************************************
+    // Function to 'copy' a DOM node into the clipboard. 
     function copyElement( element ){
         console.log("ELEMENT: ", element);
         
@@ -345,11 +345,11 @@ let shipmentsArrayMap = new Map();
         try {
             result = document.execCommand('copy');
             // console.log("Resultado de la copia: ", result );
+            window.getSelection().removeAllRanges();
         } catch (error) {
             console.log("ERROR:copyElement: Problema al copiar el elemento.", result);
             alert("Problema al copiar el elemento.");
         }
-
     }
 
 
