@@ -67,7 +67,6 @@ let shipmentsData = new Map();
 let shipmentsArrayMap = new Map();
 
 
-
     // *********************************************************
     // Event Listeners
 
@@ -113,9 +112,6 @@ let shipmentsArrayMap = new Map();
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
         shipmentsData = new Map();
         shipmentsArrayMap = new Map();
-
-
-
     }
 
     // *********************************************************
@@ -174,10 +170,9 @@ let shipmentsArrayMap = new Map();
                 if (Object.hasOwnProperty.call( row, cell)) {
                     const element = row[cell];
 
-                    // console.log("Celda : ", element, cell );
                     if( element.includes( SHOP_CODE_LONG ) ) {
                         shopCode = element.includes( SHOP_CODE_ID ) ? true : false ;
-                        // console.log("RReceiver ID code :", element);
+                        // console.log("Receiver ID code :", element);
                     }
 
                     if( element === SHIPMENT_COL.colName ){
@@ -225,7 +220,7 @@ let shipmentsArrayMap = new Map();
                 arrayData.push( truckInfoRow );
             }
         }
-        console.log("Cantidad de filas obtenidas: ", arrayData.length );
+        console.log("Cantidad de Shipments obtenidos: ", arrayData.length );
         return arrayData;
     }
     
@@ -311,7 +306,6 @@ let shipmentsArrayMap = new Map();
     function copyShipment( evento ){
         
         if(evento.target.nodeName === 'I' && evento.target.classList.contains("copy-ship") ){
-            console.log("EVENTO: ", evento.target );
             
             document.querySelectorAll('label.copy-shipment').forEach( elem => {
                 elem.classList.remove("copy-shipment");
@@ -331,7 +325,7 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     // Function to 'copy' a DOM node into the clipboard. 
     function copyElement( element ){
-        console.log("ELEMENT: ", element);
+        console.log("Copy ELEMENT: ", element);
         
         // clear all selection made before
         window.getSelection().removeAllRanges();
@@ -352,11 +346,5 @@ let shipmentsArrayMap = new Map();
         }
     }
 
-
-
     // *********************************************************
     // *********************************************************
-
-
-
-

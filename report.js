@@ -53,9 +53,6 @@ const reportPanel = document.getElementById("report-panel");
 const reportTableHeaders = document.getElementById("report-table-headers");
 const reportData = document.getElementById("report-data");
 
-// node for copy use
-const copyNode = document.getElementById("copy-node");
-
 let contentDataReport = [];
 let packingListArray = [];
 
@@ -84,17 +81,8 @@ copyReportButton.addEventListener('click', () => {
     copyElement( document.getElementById("report-table-data") );
 });
 
-packingListPanel.addEventListener('select', (evento) => {
-    console.log("Evento seleccionar: ", evento );
-});
 
-
-// *********************************************************
-// *********************************************************
-
-
-
-
+    // *********************************************************
     // *********************************************************
     // Function to read a selected file
     function openReportFile(evento) {
@@ -116,10 +104,6 @@ packingListPanel.addEventListener('select', (evento) => {
 
                 contentDataReport = removeBackflowRows( contentData );
 
-
-
-
-
                 document.getElementById("box").classList.add("box");
                 document.getElementById("shipments-content").classList.add("no-visible");
                 document.getElementById("report-content").classList.remove("no-visible");
@@ -127,7 +111,6 @@ packingListPanel.addEventListener('select', (evento) => {
             .catch( (error) => {
                 console.log("ERROR:openFile-Promise: ", error);
                 alert(error.message);
-                // initializePage();
             })
             .finally( () => {
                 loadingFrame.classList.add("no-visible");
@@ -169,7 +152,6 @@ packingListPanel.addEventListener('select', (evento) => {
     // *********************************************************
     function createPackingListMap( shipmentsArray, dataArrayReport){
 
-        // console.log("Shipments: ", shipmentsArray, " Data array report: ", dataArrayReport);
         const packListArray = [];
         let count = 0;
         
@@ -216,7 +198,6 @@ packingListPanel.addEventListener('select', (evento) => {
     // *********************************************************
     function createReport_OR130Array( shipmentsMap, dataArray ) {
 
-        console.log("Creando reporte: ", shipmentsMap, dataArray);
         const reportArray = [];
         const ship_1000_Map = new Map();
 
@@ -251,14 +232,6 @@ packingListPanel.addEventListener('select', (evento) => {
 
         showReportData( reportData );
     }
+    
     // *********************************************************
-
-
-
-    // *********************************************************
-    // *********************************************************
-    // *********************************************************
-    // *********************************************************
-
-
 

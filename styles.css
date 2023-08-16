@@ -153,21 +153,12 @@ h6.version {
 /* ***** SECTIONS AND CONTENT ***** */
 
 div.content {
-    /* background-color: blanchedalmond; */
     display: flex;
-    /* flex-direction: column; */
     flex-direction: row;
-    /* justify-content: center; */
     justify-content: space-around;
     align-items: center;
     height: 100%;
     overflow-y: auto;
-}
-
-div.content div.element {
-    /* padding: 0 0.5em; */
-    /* background-color: lemonchiffon; */
-    
 }
 
     /* ***** SECTIONS AND CONTENT - Shipments Table ***** */
@@ -321,7 +312,6 @@ div.content div.element {
 /* ***** 2th PART REPORT CONTENT - Panel frame ***** */
 
     div#report-frame {
-        /* background-color: salmon; */
         display: flex;
         z-index: 5;
         width: 100%;
@@ -377,8 +367,6 @@ div.content div.element {
     /* ***** 2th PART REPORT CONTENT - Results Panel ***** */
 
     div#report-frame div.report-panel {
-        /* background-color: goldenrod; */
-        /* padding: 0 1em; */
         width: 95%;
         margin: auto;
         height: 100%;
@@ -392,10 +380,6 @@ div.content div.element {
     
     /* ***** 2th PART REPORT CONTENT - Report Panel ***** */
 
-    table thead#report-table-headers tr {
-        /* position: sticky; */
-    }
-
     table tbody#report-data tr:nth-last-of-type(2n+0) {
         background-color: lightgray;
     }
@@ -405,4 +389,3 @@ div.content div.element {
     }
 
 /* ***** 2th PART REPORT CONTENT END ***** */
-

@@ -5,14 +5,11 @@
 
 const CSS_CLASS_ARRAY = [ "_1000", "_2000", "_3000" ];
 
-
 // *********************************************************
 // *********************************************************
 
 function showShipmentsData( shipmentsDataMap ){
     
-    // console.log("SHOW DATA: ", shipmentsDataMap);
-
     shipmentsTotal.innerText = shipmentsDataMap.size;
 
     dataTable.innerHTML = "";
@@ -20,7 +17,6 @@ function showShipmentsData( shipmentsDataMap ){
 
     shipmentsDataMap.forEach( ( row, key ) => {
         
-        // console.log("FILA: ", key, row);
         const codeClass = "_" + row.code;
 
         html += "<tr class='" + codeClass;
@@ -69,7 +65,6 @@ function showPackingListData( packListArray) {
         const colorCode = CSS_CLASS_ARRAY[count];
         shipMap.forEach( (shipment, key) => {
 
-            // console.log("Shipment: ", shipment, " Key: ", key);
             htmlPack += "<tr class='centrar ";
             htmlPack += colorCode;
             htmlPack += "'>";
@@ -93,9 +88,7 @@ function showPackingListData( packListArray) {
 function drawReportTableHeaders() {
 
     htmlReportHeaders = "";
-
     htmlReportHeaders += "<tr class='centrar'>";
-    // htmlReportHeaders += "";
 
     htmlReportHeaders += '<th>' + ARTICLE_NUMBER + '</th>';
     htmlReportHeaders += '<th>' + ARTICLE_NAME + '</th>';
@@ -127,8 +120,6 @@ function drawReportTableHeaders() {
 // *********************************************************
 function showReportData( dataReportArray ){
 
-    console.log("ShowReportData Array: ", dataReportArray);
-
     title.innerText = titleReportData;
     reportTableHeaders.innerHTML = reportData.innerHTML = "";
     htmlReport = "";
@@ -137,7 +128,6 @@ function showReportData( dataReportArray ){
     reportTableHeaders.innerHTML = drawReportTableHeaders();
     
     dataReportArray.forEach( row => {
-
         htmlReport += "<tr class='centrar'>";
         
         htmlReport += '<td>' + row[ARTICLE_NUMBER] + '</td>';
@@ -166,14 +156,8 @@ function showReportData( dataReportArray ){
 
         htmlReport += "</tr>";
     });
-
     reportData.innerHTML = htmlReport;
 }
 
 // *********************************************************
 // *********************************************************
-
-
-
-
-
