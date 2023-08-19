@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.1";
+const VERSION = "1.2";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
@@ -338,7 +338,7 @@ let shipmentsArrayMap = new Map();
         
         try {
             result = document.execCommand('copy');
-            // console.log("Resultado de la copia: ", result );
+            console.log("Resultado de la copia: ", result );
             window.getSelection().removeAllRanges();
         } catch (error) {
             console.log("ERROR:copyElement: Problema al copiar el elemento.", result);

@@ -14,6 +14,7 @@ function showShipmentsData( shipmentsDataMap ){
 
     dataTable.innerHTML = "";
     let html = "";
+    let count = 1;
 
     shipmentsDataMap.forEach( ( row, key ) => {
         
@@ -22,6 +23,10 @@ function showShipmentsData( shipmentsDataMap ){
         html += "<tr class='" + codeClass;
         html += row.isPlants ? " plants" : "";
         html += "'>";
+
+        html += "<td class='centrar'>";
+        html += count;
+        html += "</td>";
         
         html += "<td class='selection'>";
         html += "<label><i class='fa-regular fa-copy copy-ship'></i></label>";
@@ -48,6 +53,7 @@ function showShipmentsData( shipmentsDataMap ){
         html += "</td>";
 
         html += "</tr>";
+        count++;
     });
     dataTable.innerHTML = html;
 }
