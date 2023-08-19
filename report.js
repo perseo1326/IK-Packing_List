@@ -70,8 +70,8 @@ closeReportFrame.addEventListener('click', () => {
 cardPackingList.addEventListener('click', packingListReport );
 
 copyPackingListButton.addEventListener('click', () => {
-    console.log("Click en Copy Packing List button: ");
-    copyElement( packingListData );
+    console.log("Click en Copy Packing List button: ", packingListData);
+    copyElement( packingListData.parentNode );
 });
 
 cardReport.addEventListener('click', report_OR130 );
