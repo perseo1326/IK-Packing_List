@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.2";
+const VERSION = "1.3";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
@@ -316,9 +316,11 @@ let shipmentsArrayMap = new Map();
 
             copyElement( element.parentNode.parentNode.nextSibling );
 
+            /*
             setTimeout( () => {
                 element.parentNode.classList.remove("copy-shipment");
             }, 1000 );
+            */
         }
     }
 
