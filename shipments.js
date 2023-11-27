@@ -40,7 +40,7 @@ const CODE_THIRD = 3000;
 // Column name and "number of column"
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
 const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
-const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival Date", columnNumber : "" };
+const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival", columnNumber : "" };
 
 const BUTTON_CODE_FIRST = "FIRST";
 const BUTTON_CODE_SECOND = "SECOND";
@@ -164,9 +164,21 @@ let shipmentsArrayMap = new Map();
         let shopCode = false;
         let isfirstAppearance = false;
 
+        let count = 1;
+
         for (const row of grossExcelData) {
             
+            // console.log("FILA: ", row);
+            // console.log("## ", count, "/", grossExcelData.length, "shipmentId: [", shipmentId, "], receiver [", receiver, "], estimatedArrivalDate: [", estimatedArrivalDate, "], shopCode: [", shopCode, "], isfirstAppearance: [", isfirstAppearance, "]\n");
+
+            // ++count;
+            // if(count == 82)
+                // debugger
+
             for (const cell in row) {
+
+                // console.log("Celda: ", cell);
+
                 if (Object.hasOwnProperty.call( row, cell)) {
                     const element = row[cell];
 
@@ -213,7 +225,16 @@ let shipmentsArrayMap = new Map();
 
         const arrayData = [];
 
+        let count = 0;
+
+
         for (const row of grossDataArray) {
+
+            if(count == 10)
+                debugger
+            
+            console.log(count++, ") Get shipments, FILA: ", row);
+
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
 
                 const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
