@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.3";
+const VERSION = "1.4";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
@@ -164,20 +164,11 @@ let shipmentsArrayMap = new Map();
         let shopCode = false;
         let isfirstAppearance = false;
 
-        let count = 1;
-
         for (const row of grossExcelData) {
             
             // console.log("FILA: ", row);
-            // console.log("## ", count, "/", grossExcelData.length, "shipmentId: [", shipmentId, "], receiver [", receiver, "], estimatedArrivalDate: [", estimatedArrivalDate, "], shopCode: [", shopCode, "], isfirstAppearance: [", isfirstAppearance, "]\n");
-
-            // ++count;
-            // if(count == 82)
-                // debugger
-
+        
             for (const cell in row) {
-
-                // console.log("Celda: ", cell);
 
                 if (Object.hasOwnProperty.call( row, cell)) {
                     const element = row[cell];
@@ -186,19 +177,19 @@ let shipmentsArrayMap = new Map();
                         shopCode = element.includes( SHOP_CODE_ID ) ? true : false ;
                         // console.log("Receiver ID code :", element);
                     }
-
+                    
                     if( element === SHIPMENT_COL.colName ){
                         SHIPMENT_COL.columnNumber = cell;
                         // console.log("Encontrado primer encabezado: ", element, SHIPMENT_COL);
                         shipmentId = true;
                     }
-
+                    
                     if( element === RECEIVER_COL.colName ) {
                         RECEIVER_COL.columnNumber = cell;
                         // console.log("Encontrado SEGUNDO encabezado: ", element, RECEIVER_COL );
                         receiver = true;
                     }
-
+                    
                     if ( element === ESTIMATE_ARRIVAL_DATE.colName ) {
                         
                         if(isfirstAppearance){
@@ -225,19 +216,16 @@ let shipmentsArrayMap = new Map();
 
         const arrayData = [];
 
-        let count = 0;
+        for (let index = 0; index < grossDataArray.length; index++) {
 
-
-        for (const row of grossDataArray) {
-
-            if(count == 10)
-                debugger
-            
-            console.log(count++, ") Get shipments, FILA: ", row);
+            const row = grossDataArray[ index ];
+            const rowPlusOne = grossDataArray[ index + 1 ];
 
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
 
-                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+                // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
+                // from the next row because in the actual row it is not present. Excel bug!
+                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
                 arrayData.push( truckInfoRow );
             }
         }
