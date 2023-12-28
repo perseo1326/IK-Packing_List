@@ -143,8 +143,14 @@ h1 {
     padding: 0.5em 0.5em 0 0.5em;
 }
 
+a.version {
+    font-weight: bolder;
+    text-decoration: none;
+}
+
 h6.version {
-    text-align: right;
+    text-align: center;
+    font-weight: bolder;
     padding: 0 1em;
     font-weight: lighter;
     font-size: 0.7em;
@@ -173,7 +179,7 @@ div.content {
         background-color: var(--first-color);
         color: var(--second-color);
         font-weight: bold;
-        padding: 0.5em;
+        padding: 0.4em;
     }
 
     table tbody#shipments tr:hover {
@@ -225,6 +231,19 @@ div.content {
 
     table tbody#shipments tr.plants {
         background-color: var(--warning-color);
+    }
+    
+    span svg {
+        vertical-align: text-bottom;
+        width: 1.2em;
+    }
+
+    span:hover svg {
+        background-color: var(--second-color);
+    }
+    
+    span:hover svg g {
+        fill: var(--first-color);
     }
 
     /* ***** SECTIONS AND CONTENT - Shipments Commands ***** */
