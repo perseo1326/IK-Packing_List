@@ -18,6 +18,26 @@
                 <p id="loading">Cargando...</p>
             </div>
         </div>
+
+        <!-- Panel add manual shipping -->
+        <div class="loading-frame no-visible" id="add-manual-shipping-frame">
+            <div class="loading container-column">
+                <h3 class="add-shipping-title">Agregar shippment manualmente</h3>
+                <div class="container-column add-shipping-content">
+                    <label for="shipment-id">Shipment ID</label>
+                    <input type="text" name="shipment-id" id="shipment-id">
+                    <label for="">Fecha - Hora</label>
+                    <div class="container-row">
+                        <input type="date" name="shipment-date" id="shipment-date">
+                        <input type="time" name="shipment-time" id="shipment-time">
+                    </div>
+                    <div class="container-row add-shipping-buttons">
+                        <button id="add-manual-ship-ok-b" class="custom-button">Agregar</button>
+                        <button id="add-manual-ship-cancel-b" class="custom-button">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="container-title">
             <div class="title">

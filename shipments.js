@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.4";
+const VERSION = "1.5";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
@@ -61,6 +61,10 @@ const dataTable = document.getElementById("shipments");
 const shipmentsTotal = document.getElementById("shipments-total");
 const shipmentsClear = document.getElementById("shipments-clear");
 const shipmentsRemove = document.getElementById("shipments-remove");
+const addManualShipping = document.getElementById("add-manual-shipping");
+const addManualShippingFrame = document.getElementById("add-manual-shipping-frame");
+const addManualShipCancelB = document.getElementById("add-manual-ship-cancel-b");
+const addManualShipOkB = document.getElementById("add-manual-ship-ok-b");
 
 
 let shipmentsData = new Map();
@@ -96,7 +100,15 @@ let shipmentsArrayMap = new Map();
 
     dataTable.addEventListener("click", copyShipment );
 
+    addManualShipping.addEventListener('click', () => {
+        addManualShippingFrame.classList.remove("no-visible");
+    });
 
+    addManualShipCancelB.addEventListener("click", () => {
+        addManualShippingFrame.classList.add("no-visible");
+    });
+
+    // TODO: agregar margen inferior para mejora visual 
     // *********************************************************
     // *********************************************************
     // code to be executed loading page.

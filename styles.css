@@ -77,6 +77,16 @@ div.start-panel {
 	height: var(--height-data);
 }
 
+.container-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-column {
+    display: flex;
+    flex-direction: column;
+}
+
 /* ***** INITIAL SCREEN BOXES STYLES END ***** */
 
 /* ***** LOADING FRAME ***** */
@@ -99,7 +109,7 @@ div.loading-frame div.loading {
     max-width: 40%;
     margin : auto;
     top: 50%;
-	padding: 2rem ;
+	/* padding: 2rem ; */
     border-radius: 5px;
     transform: translate(-0%, -50%);
     -webkit-transform: translate(-0%, -50%);
@@ -110,6 +120,39 @@ div.loading p {
     font-weight: bold;
     font-size: 1.5em;
 }
+
+h3.add-shipping-title {
+    background-color: var(--second-color);
+    padding: 1em 0em;
+    color: var(--first-color);
+}
+
+div.add-shipping-content {
+    padding: 0.5em;
+}
+
+div.add-shipping-content label {
+    text-align: left;
+    margin: 0.3em;
+}
+
+div.add-shipping-content div {
+    justify-content: space-between;
+}
+
+div.add-shipping-content div input {
+    width: 45%;
+    text-align: center;
+}
+
+div.add-shipping-buttons {
+    padding: 0.5em 0 0.2em 0; 
+}
+
+div.add-shipping-buttons button {
+    border: 1px solid var(--second-color);
+}
+
 
 /* ***** LOADING FRAME END ***** */
 
