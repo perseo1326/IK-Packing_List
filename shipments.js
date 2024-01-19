@@ -65,6 +65,9 @@ const addManualShipping = document.getElementById("add-manual-shipping");
 const addManualShippingFrame = document.getElementById("add-manual-shipping-frame");
 const addManualShipCancelB = document.getElementById("add-manual-ship-cancel-b");
 const addManualShipOkB = document.getElementById("add-manual-ship-ok-b");
+const addShipmentId = document.getElementById("shipment-id");
+const addShipmentDate = document.getElementById("shipment-date");
+const addShipmentTime = document.getElementById("shipment-time");
 
 
 let shipmentsData = new Map();
@@ -107,6 +110,8 @@ let shipmentsArrayMap = new Map();
     addManualShipCancelB.addEventListener("click", () => {
         addManualShippingFrame.classList.add("no-visible");
     });
+
+    addManualShipOkB.addEventListener("click", addShipmentManual );
 
     // TODO: agregar margen inferior para mejora visual 
     // *********************************************************
@@ -227,14 +232,14 @@ let shipmentsArrayMap = new Map();
     function getShipmentsInfoFromGrossData( grossDataArray ){
 
         const arrayData = [];
-
+        
         for (let index = 0; index < grossDataArray.length; index++) {
-
+            
             const row = grossDataArray[ index ];
             const rowPlusOne = grossDataArray[ index + 1 ];
-
+            
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
-
+                
                 // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
                 // from the next row because in the actual row it is not present. Excel bug!
                 const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
@@ -324,6 +329,66 @@ let shipmentsArrayMap = new Map();
     }
 
     // *********************************************************
+    function addShipmentManual () {
+
+        addShipmentId.value = "ABCDE";
+
+        try {
+            // Vaidate shipping not empty
+            if(addShipmentId.value.trim() === ""){
+                addShipmentId.value = "";
+                throw new Error("El Shipment ID NO puede ser vacio.");
+            }
+            
+            // validate date and time
+
+            console.log("fecha valida: ", addShipmentDate.validity.valid);
+            console.log("tiempo valido: ", addShipmentTime.validity.valid);
+            if(addShipmentDate.validity.valid && addShipmentTime.validity.valid){
+                console.log("Fecha y hora valido");
+            } else {
+                addShipmentDate.value = "";
+                addShipmentTime.value = "";
+                throw new Error("La fecha o la hora indicadas NO son correctas.");
+            }
+        
+
+            // addShipmentDate
+            console.log("Valor de date: ");
+            console.log(addShipmentDate.value);
+
+            const date = addShipmentDate.value.split("-");
+            console.log("date: ", date);
+
+
+            // addShipmentTime
+
+
+
+            console.log("Valor de tiempo: ");
+            console.log(addShipmentTime.validity.valid);
+
+
+            // crear un objeto de tipo 'TruckInfo' 
+            // add al array 'arrayData' para incluirlo
+
+            // const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+            // arrayData.push( truckInfoRow );
+            
+
+        } catch (error) {
+                console.log("ERROR:addShipmentManual: " + error.message);
+                alert(error.message);
+
+        }
+        
+
+
+
+        console.log("addShipmentManual ...");
+    }
+    // *********************************************************
+
     function copyShipment( evento ){
         
         if(evento.target.nodeName === 'I' && evento.target.classList.contains("copy-ship") ){
