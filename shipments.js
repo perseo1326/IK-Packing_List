@@ -342,31 +342,31 @@ let shipmentsArrayMap = new Map();
             
             // validate date and time
 
-            console.log("fecha valida: ", addShipmentDate.validity.valid);
-            console.log("tiempo valido: ", addShipmentTime.validity.valid);
-            if(addShipmentDate.validity.valid && addShipmentTime.validity.valid){
-                console.log("Fecha y hora valido");
-            } else {
-                addShipmentDate.value = "";
-                addShipmentTime.value = "";
-                throw new Error("La fecha o la hora indicadas NO son correctas.");
-            }
+            // console.log("fecha valor: ", addShipmentDate.validity.valid);
+            // console.log("tiempo valor: ", addShipmentTime.validity.valid);
+            // if(addShipmentDate.value === "" || addShipmentDate.validity.valid ){
+            //     addShipmentDate.value = "";
+            //     throw new Error("La fecha o la hora indicadas NO son correctas.");
+            // // } else if(addShipmentTime.validity.valid){
+            // //     console.log("Hora Valida!");                
+            // } 
         
 
+            const a = validateDate(addShipmentDate.value);
             // addShipmentDate
-            console.log("Valor de date: ");
-            console.log(addShipmentDate.value);
+            // console.log("Valor de date: ");
+            // console.log(addShipmentDate.value);
 
-            const date = addShipmentDate.value.split("-");
-            console.log("date: ", date);
+            // const date = addShipmentDate.value.split("-");
+            // console.log("date: ", date);
 
 
             // addShipmentTime
 
 
 
-            console.log("Valor de tiempo: ");
-            console.log(addShipmentTime.validity.valid);
+            // console.log("Valor de tiempo: ");
+            // console.log(addShipmentTime.validity.valid);
 
 
             // crear un objeto de tipo 'TruckInfo' 
@@ -387,6 +387,13 @@ let shipmentsArrayMap = new Map();
 
         console.log("addShipmentManual ...");
     }
+    // *********************************************************
+    function validateDate( date ){
+        const dateObj = new Date(date);
+        console.log("Objeto fecha: ", dateObj);
+        return dateObj;
+    }
+
     // *********************************************************
 
     function copyShipment( evento ){
