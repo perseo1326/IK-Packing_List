@@ -105,9 +105,13 @@ let shipmentsArrayMap = new Map();
 
     addManualShipping.addEventListener('click', () => {
         addManualShippingFrame.classList.remove("no-visible");
+        addShipmentId.focus();
     });
 
     addManualShipCancelB.addEventListener("click", () => {
+        addShipmentId.value = "";
+        addShipmentDate.value = "";
+        addShipmentTime.value = "";
         addManualShippingFrame.classList.add("no-visible");
     });
 
@@ -331,71 +335,64 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     function addShipmentManual () {
 
-        addShipmentId.value = "ABCDE";
-
+        const shipmentId = addShipmentId.value.trim();
         try {
             // Vaidate shipping not empty
-            if(addShipmentId.value.trim() === ""){
+            if(shipmentId === ""){
                 addShipmentId.value = "";
+                addShipmentId.focus();
                 throw new Error("El Shipment ID NO puede ser vacio.");
             }
+
+            // validate the shipping ID is not already present 
+            // TODO: validar esto
+            if(shipmentsData.has(shipmentId)){
+                addShipmentId.value = "";
+                throw new Error("El Shipment ID ya existe en el listado, pruebe removerlo y agregarlo.");
+            }
             
+            // validate date
+            const shipmentDate = validateDate(addShipmentDate.value.trim());
+            if( shipmentDate === undefined ){
+                addShipmentDate.value = "";
+                addShipmentDate.focus();
+                throw new Error("Fecha no válida");
+            }
+
             // validate date and time
+            if( isNaN(addShipmentTime.valueAsNumber) ){
+                addShipmentTime.value = "";
+                addShipmentTime.focus();
+                throw new Error("Hora no válida");
+            }
 
-            // console.log("fecha valor: ", addShipmentDate.validity.valid);
-            // console.log("tiempo valor: ", addShipmentTime.validity.valid);
-            // if(addShipmentDate.value === "" || addShipmentDate.validity.valid ){
-            //     addShipmentDate.value = "";
-            //     throw new Error("La fecha o la hora indicadas NO son correctas.");
-            // // } else if(addShipmentTime.validity.valid){
-            // //     console.log("Hora Valida!");                
-            // } 
-        
+            const dateTimeString = ( shipmentDate + " " + addShipmentTime.value.trim());
 
-            const a = validateDate(addShipmentDate.value);
-            // addShipmentDate
-            // console.log("Valor de date: ");
-            // console.log(addShipmentDate.value);
-
-            // const date = addShipmentDate.value.split("-");
-            // console.log("date: ", date);
-
-
-            // addShipmentTime
-
-
-
-            // console.log("Valor de tiempo: ");
-            // console.log(addShipmentTime.validity.valid);
-
-
-            // crear un objeto de tipo 'TruckInfo' 
-            // add al array 'arrayData' para incluirlo
-
-            // const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
-            // arrayData.push( truckInfoRow );
+            const truckInfoRow = new TruckInfo( shipmentId, dateTimeString);
             
+            shipmentsData.set( truckInfoRow.shipmentId, truckInfoRow );
+            addManualShipCancelB.click();
+            showShipmentsData(shipmentsData);
 
         } catch (error) {
                 console.log("ERROR:addShipmentManual: " + error.message);
                 alert(error.message);
-
         }
-        
-
-
-
-        console.log("addShipmentManual ...");
-    }
-    // *********************************************************
-    function validateDate( date ){
-        const dateObj = new Date(date);
-        console.log("Objeto fecha: ", dateObj);
-        return dateObj;
     }
 
     // *********************************************************
+    // If return is "true" => date NOT valid!
+    function validateDate( stringDate ){
+        console.log("Validate Date: ", stringDate);
+        if( isNaN(Date.parse(stringDate)) ) {
+            return undefined;
+        } 
+        const date = new Date(stringDate);
 
+        return ("FECHA: ", date.getDate() + '/' + (date.getMonth() + 1 ) + '/' + date.getFullYear() );
+    }
+
+    // *********************************************************
     function copyShipment( evento ){
         
         if(evento.target.nodeName === 'I' && evento.target.classList.contains("copy-ship") ){
