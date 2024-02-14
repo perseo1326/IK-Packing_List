@@ -186,7 +186,7 @@ h1 {
     padding: 0.5em 0.5em 0 0.5em;
 }
 
-a.version {
+a {
     font-weight: bolder;
     text-decoration: none;
 }
@@ -297,7 +297,7 @@ div.content {
     }
     
     div.content div.element div.shipments-commands p {
-        margin-bottom: 0.3em;
+        margin-bottom: 0.5em;
     }
 
     div.content div.element div.shipments-commands fieldset  {

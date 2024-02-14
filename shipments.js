@@ -417,7 +417,7 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     // Function to 'copy' a DOM node into the clipboard. 
     function copyElement( element ){
-        console.log("Copy ELEMENT: ", element);
+        console.log("Copy ELEMENT: ", element.innerText.trim());
         
         // clear all selection made before
         window.getSelection().removeAllRanges();

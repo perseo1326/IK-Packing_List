@@ -26,7 +26,7 @@
                 <div class="container-column add-shipping-content">
                     <label for="shipment-id">Shipment ID</label>
                     <input type="text" name="shipment-id" id="shipment-id" autofocus required>
-                    <label for="">Fecha - Hora</label>
+                    <label for="shipment-date">Fecha - Hora</label>
                     <div class="container-row">
                         <input type="date" name="shipment-date" id="shipment-date" required>
                         <input type="time" name="shipment-time" id="shipment-time" required>
@@ -55,6 +55,9 @@
                 <div id="button-load-shipments" class="element">
                         <label id="shipments-data-label" class="custom-button" for="shipments-data">Información de Shipments</label>
                         <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
+                        <a href="https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP" target="_blank">
+                            <button class="custom-button">Abrir ITMS...</button>
+                        </a>
                 </div>
 
                 <div id="shipments-container" class="element no-visible">
