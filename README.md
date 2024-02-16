@@ -5,6 +5,7 @@ Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado
 ### Version 1.5
 * Agregada funcionalidad para permitir agregar un No. de shipment junto a su fecha de forma manual, teniendo en cuenta la validación de fecha y hora válidas, además de evitar reemplazar un shipment con uno existente en la lista previamente.
 * Agregado enlace a la página del gestor de transportes ITMS.
+* Agregado enlace para FMS Reporting Auto Exporter reporte "*OR130A*".
 
 * TODO: Adicionada margen inferior para mejorar la visualización de la página.
 
