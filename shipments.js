@@ -24,6 +24,7 @@ const VERSION = "1.5";
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
 const titleReportData = "Reporte OR130 - Reducido";
+const ITMS_LINK = "https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP";
 
 // Excel shipments file manipulation values
 const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
@@ -129,6 +130,9 @@ let shipmentsArrayMap = new Map();
         console.log("Inicializando valores originales...");
         document.getElementById("title").innerText = document.title = titleMain;
         loadFileLabel.innerText = "Información de Shipments";
+
+        // Initialize url for ITMS button
+        document.getElementById("ITMS-link").href = ITMS_LINK;
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
         shipmentsData = new Map();
