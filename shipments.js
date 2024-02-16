@@ -26,6 +26,7 @@ const titlePackingListData = "Packing List - Listado";
 const titleReportData = "Reporte OR130 - Reducido";
 const ITMS_LINK = "https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP";
 const FMS_AUTO_EXPORTER_OR130A = "https://exporter.fms-reporting.ingka.com/schedules/6182";
+const RECEIVING_LINK = "https://mhs406.ikea.com/sgf/receiving";
 
 // Excel shipments file manipulation values
 const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
@@ -59,6 +60,7 @@ const shipments = document.getElementById("shipments-data");
 const loadingFrame = document.getElementById("loading-frame");
 const loadFileLabel = document.getElementById("shipments-data-label");
 const fmsReport_OR130A = document.getElementById("FMS_OR130A_link");
+const receivingResource = document.getElementById("receiving-link");
 
 const dataTable = document.getElementById("shipments");
 const shipmentsTotal = document.getElementById("shipments-total");
@@ -124,6 +126,10 @@ let shipmentsArrayMap = new Map();
         document.getElementById("load-OR130A-report").classList.remove("no-visible");
     });
 
+    receivingResource.addEventListener("click", () => {
+        fmsReport_OR130A.classList.remove("no-visible");
+    });
+
     // TODO: agregar margen inferior para mejora visual 
     // *********************************************************
     // *********************************************************
@@ -141,6 +147,8 @@ let shipmentsArrayMap = new Map();
         document.getElementById("ITMS-link").href = ITMS_LINK;
         // Initialize url for FMS Auto Exporter report "OR130A"
         fmsReport_OR130A.href = FMS_AUTO_EXPORTER_OR130A;
+        // Initialize url for "Receiving web page" (Gestor de entregas)
+        receivingResource.href = RECEIVING_LINK;
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
         shipmentsData = new Map();
