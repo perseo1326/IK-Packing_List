@@ -34,7 +34,9 @@ function showShipmentsData( shipmentsDataMap ){
         html += "</td>";
 
         html += "<td>";
+        html += "<p>"
         html += key;
+        html += "</p>"
         html += "</td>";
 
         html += "<td class='centrar'>";

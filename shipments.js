@@ -426,17 +426,16 @@ let shipmentsArrayMap = new Map();
 
     // *********************************************************
     function copyShipment( evento ){
-        
         if(evento.target.nodeName === 'I' && evento.target.classList.contains("copy-ship") ){
             
             document.querySelectorAll('label.copy-shipment').forEach( elem => {
                 elem.classList.remove("copy-shipment");
             });
-
+            
             const element = evento.target;
             element.parentNode.classList.add("copy-shipment");
 
-            copyElement( element.parentNode.parentNode.nextSibling );
+            copyElement( element.parentNode.parentNode.nextSibling.firstChild );
 
             /*
             setTimeout( () => {
@@ -449,7 +448,9 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     // Function to 'copy' a DOM node into the clipboard. 
     function copyElement( element ){
-        console.log("Copy ELEMENT: ", element.innerText.trim());
+        console.log("Copy ELEMENT: ", element);
+
+        element.innerText = element.innerText.trim();
         
         // clear all selection made before
         window.getSelection().removeAllRanges();
