@@ -3,10 +3,11 @@
 Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado a las necesidades de GALEX.
 
 ### Version 1.5
-* Agregada funcionalidad para permitir agregar un No. de shipment junto a su fecha de forma manual, teniendo en cuenta la validación de fecha y hora válidas, además de evitar reemplazar un shipment con uno existente en la lista previamente.
-* Agregado enlace a la página del gestor de transportes ITMS.
+* Agregada funcionalidad para permitir agregar un No. de shipment junto a su fecha de forma manual, teniendo en cuenta la validación de fecha y hora, además de evitar reemplazar un shipment con uno existente en la lista previamente.
+* Agregado enlace a la página del gestor de transportes *ITMS*.
 * Agregado enlace para FMS Reporting Auto Exporter reporte "*OR130A*".
 * Agregado enlace para "Gestor de Entregas", para facilitar el proceso.
+* Mejora visual en los selectores de codigo (1000, 2000, 3000) indicando el total de filas seleccionadas para cada valor.
 
 * TODO: Adicionada margen inferior para mejorar la visualización de la página.
 

@@ -39,7 +39,6 @@ const CODE_FIRST = 1000;
 const CODE_SECOND = 2000;
 const CODE_THIRD = 3000;
 
-
 // Column name and "number of column"
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
 const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
@@ -48,13 +47,25 @@ const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival", columnNumber : ""
 const BUTTON_CODE_FIRST = "FIRST";
 const BUTTON_CODE_SECOND = "SECOND";
 const BUTTON_CODE_THIRD = "THIRD";
-
 const shipmentsFirst = document.getElementById(BUTTON_CODE_FIRST);
 const shipmentsSecond = document.getElementById(BUTTON_CODE_SECOND);
 const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
 
+// Immediately invoked function expressions (IIFE)
+( function() { 
+
+try {
+    if(shipmentsFirst === null || shipmentsSecond === null || shipmentsThird === null ) {
+        throw new Error("Error interno: El código de semana (1000, 2000, 3000) no es válido.");
+    }
+    
+} catch (error) {
+    console.log("ERROR:VARIABLES: shipmentsFirst, shipmentsSecond, shipmentsThird");
+    alert(error.message);
+    return;
+}
+
 const footerVersion = document.getElementById("version-footer");
-const title = document.getElementById("title");
 const shipments = document.getElementById("shipments-data");
 
 const loadingFrame = document.getElementById("loading-frame");
@@ -63,7 +74,7 @@ const fmsReport_OR130A = document.getElementById("FMS_OR130A_link");
 const receivingResource = document.getElementById("receiving-link");
 
 const dataTable = document.getElementById("shipments");
-const shipmentsTotal = document.getElementById("shipments-total");
+// const shipmentsTotal = document.getElementById("shipments-total");
 const shipmentsClear = document.getElementById("shipments-clear");
 const shipmentsRemove = document.getElementById("shipments-remove");
 const addManualShipping = document.getElementById("add-manual-shipping");
@@ -308,6 +319,7 @@ let shipmentsArrayMap = new Map();
                 writeShipmentCode(CODE_THIRD);
                 break;
             default:
+                console.log("WARNING:changeShipmentCode: Ningún caso válido seleccionado!");
                 return;
         }
         showShipmentsData(shipmentsData);
@@ -460,3 +472,5 @@ let shipmentsArrayMap = new Map();
 
     // *********************************************************
     // *********************************************************
+
+})();
