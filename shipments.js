@@ -51,8 +51,6 @@ const shipmentsFirst = document.getElementById(BUTTON_CODE_FIRST);
 const shipmentsSecond = document.getElementById(BUTTON_CODE_SECOND);
 const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
 
-// Immediately invoked function expressions (IIFE)
-( function() { 
 
 try {
     if(shipmentsFirst === null || shipmentsSecond === null || shipmentsThird === null ) {
@@ -62,7 +60,6 @@ try {
 } catch (error) {
     console.log("ERROR:VARIABLES: shipmentsFirst, shipmentsSecond, shipmentsThird");
     alert(error.message);
-    return;
 }
 
 const footerVersion = document.getElementById("version-footer");
@@ -70,8 +67,6 @@ const shipments = document.getElementById("shipments-data");
 
 const loadingFrame = document.getElementById("loading-frame");
 const loadFileLabel = document.getElementById("shipments-data-label");
-const fmsReport_OR130A = document.getElementById("FMS_OR130A_link");
-const receivingResource = document.getElementById("receiving-link");
 
 const dataTable = document.getElementById("shipments");
 // const shipmentsTotal = document.getElementById("shipments-total");
@@ -133,14 +128,6 @@ let shipmentsArrayMap = new Map();
 
     addManualShipOkB.addEventListener("click", addShipmentManual );
 
-    fmsReport_OR130A.addEventListener("click", () => {
-        document.getElementById("load-OR130A-report").classList.remove("no-visible");
-    });
-
-    receivingResource.addEventListener("click", () => {
-        fmsReport_OR130A.classList.remove("no-visible");
-    });
-
     // TODO: agregar margen inferior para mejora visual 
     // *********************************************************
     // *********************************************************
@@ -156,10 +143,10 @@ let shipmentsArrayMap = new Map();
 
         // Initialize url for ITMS button
         document.getElementById("ITMS-link").href = ITMS_LINK;
-        // Initialize url for FMS Auto Exporter report "OR130A"
-        fmsReport_OR130A.href = FMS_AUTO_EXPORTER_OR130A;
         // Initialize url for "Receiving web page" (Gestor de entregas)
-        receivingResource.href = RECEIVING_LINK;
+        document.getElementById("receiving-link").href = RECEIVING_LINK;
+        // Initialize url for FMS Auto Exporter report "OR130A"
+        document.getElementById("FMS_OR130A_link").href = FMS_AUTO_EXPORTER_OR130A;
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
         shipmentsData = new Map();
@@ -436,6 +423,7 @@ let shipmentsArrayMap = new Map();
             element.parentNode.classList.add("copy-shipment");
 
             copyElement( element.parentNode.parentNode.nextSibling.firstChild );
+            // copyElement( element.parentNode.parentNode.nextSibling );
 
             /*
             setTimeout( () => {
@@ -450,7 +438,7 @@ let shipmentsArrayMap = new Map();
     function copyElement( element ){
         console.log("Copy ELEMENT: ", element);
 
-        element.innerText = element.innerText.trim();
+        // element.innerText = element.innerText.trim();
         
         // clear all selection made before
         window.getSelection().removeAllRanges();
@@ -473,5 +461,3 @@ let shipmentsArrayMap = new Map();
 
     // *********************************************************
     // *********************************************************
-
-})();
