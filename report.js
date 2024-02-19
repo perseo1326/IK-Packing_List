@@ -88,7 +88,14 @@ copyReportButton.addEventListener('click', () => {
     function openReportFile(evento) {
         try {
             // validate the user selection for the shipments
+            debugger
+            console.log("shipmentsArrayMap: ", shipmentsArrayMap);
+
             shipmentsArrayMap = validateSelectionShipments( shipmentsData );
+            if(shipmentsArrayMap.lenght <= 0 ){
+                console.log("ERROR:validateSelectionShipments: Por favor revise su selección de shipments y elimine los que no use.");
+                throw new Error("Por favor revise su selección de shipments y elimine los que no use.");
+            }
 
             const file = evento.target.files[0];
             loadingFrame.classList.remove("no-visible");

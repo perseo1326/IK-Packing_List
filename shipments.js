@@ -323,6 +323,7 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     function validateSelectionShipments( shipmentsMap ){
 
+        let isValid = true;
         const shipmentsArray = [];
         const shipment_1000 = new Map();
         const shipment_2000 = new Map();
@@ -340,13 +341,17 @@ let shipmentsArrayMap = new Map();
                     shipment_3000.set( key, shipment );
                     break;
                 default:
-                    console.log("ERROR:validateSelectionShipments: Por favor revise su selección de shipments y elimine los que no use.");
-                    throw new Error("Por favor revise su selección de shipments y elimine los que no use.");
-            }
+                    console.log("ERROR:validateSelectionShipments: Existen shipments sin asignar código.");
+                    isValid = false;
+                    break;
+                    // return shipmentsArray;
+    }
         });
-        shipmentsArray.push(shipment_1000);
-        shipmentsArray.push(shipment_2000);
-        shipmentsArray.push(shipment_3000);
+        if(isValid){
+            shipmentsArray.push(shipment_1000);
+            shipmentsArray.push(shipment_2000);
+            shipmentsArray.push(shipment_3000);
+        }
         
         return shipmentsArray;
     }
