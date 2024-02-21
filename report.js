@@ -88,15 +88,21 @@ copyReportButton.addEventListener('click', () => {
     function openReportFile(evento) {
         try {
             // validate the user selection for the shipments
-            debugger
-            console.log("shipmentsArrayMap: ", shipmentsArrayMap);
-
+            shipmentsArrayMap = [];
             shipmentsArrayMap = validateSelectionShipments( shipmentsData );
-            if(shipmentsArrayMap.lenght <= 0 ){
+            
+            console.log("RESULTADO: ", shipmentsArrayMap);
+            
+            
+            if(shipmentsArrayMap === undefined){
                 console.log("ERROR:validateSelectionShipments: Por favor revise su selección de shipments y elimine los que no use.");
+                // alert("Por favor revise su selección de shipments y elimine los que no use.");
+                reportLoadButton.value = "";
+                evento.stopPropagation();
                 throw new Error("Por favor revise su selección de shipments y elimine los que no use.");
+                return;
             }
-
+            
             const file = evento.target.files[0];
             loadingFrame.classList.remove("no-visible");
 

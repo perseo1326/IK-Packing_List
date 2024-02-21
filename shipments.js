@@ -82,7 +82,8 @@ const addShipmentTime = document.getElementById("shipment-time");
 
 
 let shipmentsData = new Map();
-let shipmentsArrayMap = new Map();
+// let shipmentsArrayMap = new Map();
+let shipmentsArrayMap = [];
 
 
     // *********************************************************
@@ -150,7 +151,8 @@ let shipmentsArrayMap = new Map();
         
         footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
         shipmentsData = new Map();
-        shipmentsArrayMap = new Map();
+        // shipmentsArrayMap = new Map();
+        shipmentsArrayMap = [];
     }
 
     // *********************************************************
@@ -341,17 +343,16 @@ let shipmentsArrayMap = new Map();
                     shipment_3000.set( key, shipment );
                     break;
                 default:
-                    console.log("ERROR:validateSelectionShipments: Existen shipments sin asignar código.");
+                    console.log("WARNING:validateSelectionShipments: Existen shipments sin asignar código.");
                     isValid = false;
-                    break;
-                    // return shipmentsArray;
     }
         });
-        if(isValid){
-            shipmentsArray.push(shipment_1000);
-            shipmentsArray.push(shipment_2000);
-            shipmentsArray.push(shipment_3000);
+        if(!isValid){
+            return undefined;
         }
+        shipmentsArray.push(shipment_1000);
+        shipmentsArray.push(shipment_2000);
+        shipmentsArray.push(shipment_3000);
         
         return shipmentsArray;
     }
