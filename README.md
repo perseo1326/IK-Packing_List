@@ -9,6 +9,7 @@ Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado
 * Agregado enlace para "Gestor de Entregas", para facilitar el proceso.
 * Mejora visual en los selectores de codigo (1000, 2000, 3000) indicando el total de filas seleccionadas para cada valor.
 * Ahora al "*copiar*" un shipmentd Id el texto es correcto, sin espacios al final.
+* Reparado el error cuando se dejaban shipments sin asignar código y se continuaba con el proceso.
 
 * TODO: Adicionada margen inferior para mejorar la visualización de la página.
 
