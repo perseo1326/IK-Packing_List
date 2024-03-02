@@ -340,6 +340,7 @@ div.content {
         height: 15em;
         width: 12em;
         cursor: pointer;
+        margin: auto;
     }
 
     div.element div.card:hover {
@@ -369,6 +370,11 @@ div.content {
     
     div.element div.card:hover div.card-content i {
         color: var(--second-color);
+    }
+
+    a.macro-link {
+        padding-top: 2em;
+        background-color: red;
     }
 
 /* ***** 2th PART REPORT CONTENT - Panel frame ***** */

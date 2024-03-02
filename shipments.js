@@ -27,6 +27,10 @@ const titleReportData = "Reporte OR130 - Reducido";
 const ITMS_LINK = "https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP";
 const FMS_AUTO_EXPORTER_OR130A = "https://exporter.fms-reporting.ingka.com/schedules/6182";
 const RECEIVING_LINK = "https://mhs406.ikea.com/sgf/receiving";
+const SHIPMENTS_INFO_BUTTON = "2. Información de Shipments";
+const EXCEL_FILE_PEDIDOS_TOOL = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20PEDIDOS%2023.11.xlsm?d=wabe1a4e6617544bd8a833e3134fbfe21&csf=1&web=1&e=6CswHv";
+const EXCEL_FILE_CARGAS_INFLOW = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20CARGAS%20INFLOW%2023.7.xlsm?d=w6d69e3a9ecb9404d96303b15f4c525ff&csf=1&web=1&e=WdwZ6I";
+const SHAREPOINT_EXTERNO_RUTINAS = "https://iweof.sharepoint.com/:f:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas?csf=1&web=1&e=dGYx7N";
 
 // Excel shipments file manipulation values
 const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
@@ -69,9 +73,11 @@ const loadingFrame = document.getElementById("loading-frame");
 const loadFileLabel = document.getElementById("shipments-data-label");
 
 const dataTable = document.getElementById("shipments");
-// const shipmentsTotal = document.getElementById("shipments-total");
 const shipmentsClear = document.getElementById("shipments-clear");
 const shipmentsRemove = document.getElementById("shipments-remove");
+const esboOrder = document.getElementById("esbo-order");
+const inflowLoad = document.getElementById("inflow-load");
+
 const addManualShipping = document.getElementById("add-manual-shipping");
 const addManualShippingFrame = document.getElementById("add-manual-shipping-frame");
 const addManualShipCancelB = document.getElementById("add-manual-ship-cancel-b");
@@ -82,7 +88,6 @@ const addShipmentTime = document.getElementById("shipment-time");
 
 
 let shipmentsData = new Map();
-// let shipmentsArrayMap = new Map();
 let shipmentsArrayMap = [];
 
 
@@ -113,6 +118,14 @@ let shipmentsArrayMap = [];
     shipmentsSecond.addEventListener('click', changeShipmentCode );
     shipmentsThird.addEventListener('click', changeShipmentCode );
 
+    esboOrder.addEventListener('click', () => {
+        // debugger
+        console.log(esboOrder);
+        // esboOrder.parentElement.href = EXCEL_FILE_PEDIDOS_TOOL;
+        esboOrder.parentElement.href = SHAREPOINT_EXTERNO_RUTINAS;
+        // esboOrder.parentElement.click();
+    });
+
     dataTable.addEventListener("click", copyShipment );
 
     addManualShipping.addEventListener('click', () => {
@@ -140,7 +153,7 @@ let shipmentsArrayMap = [];
     function initializePage() {
         console.log("Inicializando valores originales...");
         document.getElementById("title").innerText = document.title = titleMain;
-        loadFileLabel.innerText = "Información de Shipments";
+        loadFileLabel.innerText = SHIPMENTS_INFO_BUTTON;
 
         // Initialize url for ITMS button
         document.getElementById("ITMS-link").href = ITMS_LINK;

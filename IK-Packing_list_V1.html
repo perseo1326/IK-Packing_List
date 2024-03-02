@@ -53,12 +53,11 @@
 
                 <!-- Button load file -->
                 <div id="button-load-shipments" class="element">
-                        <label id="shipments-data-label" class="custom-button" for="shipments-data">Información de Shipments</label>
-                        <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
-                        <!-- <a href="https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP" target="_blank"> -->
-                        <a id="ITMS-link" href="#" target="_blank">
-                            <button class="custom-button">Abrir ITMS...</button>
-                        </a>
+                    <a id="ITMS-link" href="#" target="_blank">
+                        <button class="custom-button">1. Abrir ITMS...</button>
+                    </a>
+                    <label id="shipments-data-label" class="custom-button" for="shipments-data"></label>
+                    <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
                 </div>
 
                 <div id="shipments-container" class="element no-visible">
@@ -115,6 +114,11 @@
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
                         </div>
+                        <div class="">
+                            <a href="#" class="macro-link" target="_blank">
+                                <button id="esbo-order" class="custom-button enlace-macro">Herramienta Pedidos ESBO</button>
+                            </a>
+                        </div>
                     </div>
                     
                     <!-- Card for OR130 Report -->
@@ -127,6 +131,11 @@
                             <div class="card-content">
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
+                        </div>
+                        <div class="">
+                            <a href="#" class="macro-link" target="_blank">
+                                <button id="inflow-load" class="custom-button">Herramienta Cargas Inflow</button>
+                            </a>
                         </div>
                     </div>
                 </div>
