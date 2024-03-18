@@ -2,8 +2,8 @@
 
 Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado a las necesidades de GALEX.
 
-### Version 1.5
-* 
+### Version 1.5.5
+* Agregados enlaces para abrir las ubicaciones de las macros de Excel para la herramienta de pedidos a ESBO y la herramienta de propuesta de carga para Inflow.
 
 ### Version 1.5
 * Agregada funcionalidad para permitir agregar un No. de shipment junto a su fecha de forma manual, teniendo en cuenta la validación de fecha y hora, además de evitar reemplazar un shipment con uno existente en la lista previamente.

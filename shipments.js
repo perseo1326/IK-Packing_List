@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.5";
+const VERSION = "1.5.5";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
@@ -119,11 +119,12 @@ let shipmentsArrayMap = [];
     shipmentsThird.addEventListener('click', changeShipmentCode );
 
     esboOrder.addEventListener('click', () => {
-        // debugger
         console.log(esboOrder);
-        // esboOrder.parentElement.href = EXCEL_FILE_PEDIDOS_TOOL;
         esboOrder.parentElement.href = SHAREPOINT_EXTERNO_RUTINAS;
-        // esboOrder.parentElement.click();
+    });
+
+    inflowLoad.addEventListener('click', () => {
+        inflowLoad.parentElement.href = SHAREPOINT_EXTERNO_RUTINAS;
     });
 
     dataTable.addEventListener("click", copyShipment );
