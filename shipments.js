@@ -19,11 +19,18 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.4";
+const VERSION = "1.5.5";
 
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
 const titleReportData = "Reporte OR130 - Reducido";
+const ITMS_LINK = "https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP";
+const FMS_AUTO_EXPORTER_OR130A = "https://exporter.fms-reporting.ingka.com/schedules/6182";
+const RECEIVING_LINK = "https://mhs406.ikea.com/sgf/receiving";
+const SHIPMENTS_INFO_BUTTON = "2. Información de Shipments";
+const EXCEL_FILE_PEDIDOS_TOOL = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20PEDIDOS%2023.11.xlsm?d=wabe1a4e6617544bd8a833e3134fbfe21&csf=1&web=1&e=6CswHv";
+const EXCEL_FILE_CARGAS_INFLOW = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20CARGAS%20INFLOW%2023.7.xlsm?d=w6d69e3a9ecb9404d96303b15f4c525ff&csf=1&web=1&e=WdwZ6I";
+const SHAREPOINT_EXTERNO_RUTINAS = "https://iweof.sharepoint.com/:f:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas?csf=1&web=1&e=dGYx7N";
 
 // Excel shipments file manipulation values
 const SHIPMENTS_FILE_EXTENSION_ARRAY = [ "xlsx" ];
@@ -36,7 +43,6 @@ const CODE_FIRST = 1000;
 const CODE_SECOND = 2000;
 const CODE_THIRD = 3000;
 
-
 // Column name and "number of column"
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
 const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
@@ -45,26 +51,44 @@ const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival", columnNumber : ""
 const BUTTON_CODE_FIRST = "FIRST";
 const BUTTON_CODE_SECOND = "SECOND";
 const BUTTON_CODE_THIRD = "THIRD";
-
 const shipmentsFirst = document.getElementById(BUTTON_CODE_FIRST);
 const shipmentsSecond = document.getElementById(BUTTON_CODE_SECOND);
 const shipmentsThird = document.getElementById(BUTTON_CODE_THIRD);
 
+
+try {
+    if(shipmentsFirst === null || shipmentsSecond === null || shipmentsThird === null ) {
+        throw new Error("Error interno: El código de semana (1000, 2000, 3000) no es válido.");
+    }
+    
+} catch (error) {
+    console.log("ERROR:VARIABLES: shipmentsFirst, shipmentsSecond, shipmentsThird");
+    alert(error.message);
+}
+
 const footerVersion = document.getElementById("version-footer");
-const title = document.getElementById("title");
 const shipments = document.getElementById("shipments-data");
 
 const loadingFrame = document.getElementById("loading-frame");
 const loadFileLabel = document.getElementById("shipments-data-label");
 
 const dataTable = document.getElementById("shipments");
-const shipmentsTotal = document.getElementById("shipments-total");
 const shipmentsClear = document.getElementById("shipments-clear");
 const shipmentsRemove = document.getElementById("shipments-remove");
+const esboOrder = document.getElementById("esbo-order");
+const inflowLoad = document.getElementById("inflow-load");
+
+const addManualShipping = document.getElementById("add-manual-shipping");
+const addManualShippingFrame = document.getElementById("add-manual-shipping-frame");
+const addManualShipCancelB = document.getElementById("add-manual-ship-cancel-b");
+const addManualShipOkB = document.getElementById("add-manual-ship-ok-b");
+const addShipmentId = document.getElementById("shipment-id");
+const addShipmentDate = document.getElementById("shipment-date");
+const addShipmentTime = document.getElementById("shipment-time");
 
 
 let shipmentsData = new Map();
-let shipmentsArrayMap = new Map();
+let shipmentsArrayMap = [];
 
 
     // *********************************************************
@@ -94,9 +118,32 @@ let shipmentsArrayMap = new Map();
     shipmentsSecond.addEventListener('click', changeShipmentCode );
     shipmentsThird.addEventListener('click', changeShipmentCode );
 
+    esboOrder.addEventListener('click', () => {
+        console.log(esboOrder);
+        esboOrder.parentElement.href = SHAREPOINT_EXTERNO_RUTINAS;
+    });
+
+    inflowLoad.addEventListener('click', () => {
+        inflowLoad.parentElement.href = SHAREPOINT_EXTERNO_RUTINAS;
+    });
+
     dataTable.addEventListener("click", copyShipment );
 
+    addManualShipping.addEventListener('click', () => {
+        addManualShippingFrame.classList.remove("no-visible");
+        addShipmentId.focus();
+    });
 
+    addManualShipCancelB.addEventListener("click", () => {
+        addShipmentId.value = "";
+        addShipmentDate.value = "";
+        addShipmentTime.value = "";
+        addManualShippingFrame.classList.add("no-visible");
+    });
+
+    addManualShipOkB.addEventListener("click", addShipmentManual );
+
+    // TODO: agregar margen inferior para mejora visual 
     // *********************************************************
     // *********************************************************
     // code to be executed loading page.
@@ -107,11 +154,19 @@ let shipmentsArrayMap = new Map();
     function initializePage() {
         console.log("Inicializando valores originales...");
         document.getElementById("title").innerText = document.title = titleMain;
-        loadFileLabel.innerText = "Información de Shipments";
+        loadFileLabel.innerText = SHIPMENTS_INFO_BUTTON;
+
+        // Initialize url for ITMS button
+        document.getElementById("ITMS-link").href = ITMS_LINK;
+        // Initialize url for "Receiving web page" (Gestor de entregas)
+        document.getElementById("receiving-link").href = RECEIVING_LINK;
+        // Initialize url for FMS Auto Exporter report "OR130A"
+        document.getElementById("FMS_OR130A_link").href = FMS_AUTO_EXPORTER_OR130A;
         
         footerVersion.innerHTML = "Versión " + VERSION + " - " + footerVersion.innerHTML;
         shipmentsData = new Map();
-        shipmentsArrayMap = new Map();
+        // shipmentsArrayMap = new Map();
+        shipmentsArrayMap = [];
     }
 
     // *********************************************************
@@ -215,14 +270,14 @@ let shipmentsArrayMap = new Map();
     function getShipmentsInfoFromGrossData( grossDataArray ){
 
         const arrayData = [];
-
+        
         for (let index = 0; index < grossDataArray.length; index++) {
-
+            
             const row = grossDataArray[ index ];
             const rowPlusOne = grossDataArray[ index + 1 ];
-
+            
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
-
+                
                 // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
                 // from the next row because in the actual row it is not present. Excel bug!
                 const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
@@ -267,6 +322,7 @@ let shipmentsArrayMap = new Map();
                 writeShipmentCode(CODE_THIRD);
                 break;
             default:
+                console.log("WARNING:changeShipmentCode: Ningún caso válido seleccionado!");
                 return;
         }
         showShipmentsData(shipmentsData);
@@ -283,6 +339,7 @@ let shipmentsArrayMap = new Map();
     // *********************************************************
     function validateSelectionShipments( shipmentsMap ){
 
+        let isValid = true;
         const shipmentsArray = [];
         const shipment_1000 = new Map();
         const shipment_2000 = new Map();
@@ -300,10 +357,13 @@ let shipmentsArrayMap = new Map();
                     shipment_3000.set( key, shipment );
                     break;
                 default:
-                    console.log("ERROR:validateSelectionShipments: Por favor revise su selección de shipments y elimine los que no use.");
-                    throw new Error("Por favor revise su selección de shipments y elimine los que no use.");
-            }
+                    console.log("WARNING:validateSelectionShipments: Existen shipments sin asignar código.");
+                    isValid = false;
+    }
         });
+        if(!isValid){
+            return undefined;
+        }
         shipmentsArray.push(shipment_1000);
         shipmentsArray.push(shipment_2000);
         shipmentsArray.push(shipment_3000);
@@ -312,18 +372,78 @@ let shipmentsArrayMap = new Map();
     }
 
     // *********************************************************
+    function addShipmentManual () {
+
+        const shipmentId = addShipmentId.value.trim();
+        try {
+            // Vaidate shipping not empty
+            if(shipmentId === ""){
+                addShipmentId.value = "";
+                addShipmentId.focus();
+                throw new Error("El Shipment ID NO puede ser vacio.");
+            }
+
+            // validate the shipping ID is not already present 
+            // TODO: validar esto
+            if(shipmentsData.has(shipmentId)){
+                addShipmentId.value = "";
+                throw new Error("El Shipment ID ya existe en el listado, pruebe removerlo y agregarlo.");
+            }
+            
+            // validate date
+            const shipmentDate = validateDate(addShipmentDate.value.trim());
+            if( shipmentDate === undefined ){
+                addShipmentDate.value = "";
+                addShipmentDate.focus();
+                throw new Error("Fecha no válida");
+            }
+
+            // validate date and time
+            if( isNaN(addShipmentTime.valueAsNumber) ){
+                addShipmentTime.value = "";
+                addShipmentTime.focus();
+                throw new Error("Hora no válida");
+            }
+
+            const dateTimeString = ( shipmentDate + " " + addShipmentTime.value.trim());
+
+            const truckInfoRow = new TruckInfo( shipmentId, dateTimeString);
+            
+            shipmentsData.set( truckInfoRow.shipmentId, truckInfoRow );
+            addManualShipCancelB.click();
+            showShipmentsData(shipmentsData);
+
+        } catch (error) {
+                console.log("ERROR:addShipmentManual: " + error.message);
+                alert(error.message);
+        }
+    }
+
+    // *********************************************************
+    // If return is "true" => date NOT valid!
+    function validateDate( stringDate ){
+        console.log("Validate Date: ", stringDate);
+        if( isNaN(Date.parse(stringDate)) ) {
+            return undefined;
+        } 
+        const date = new Date(stringDate);
+
+        return ("FECHA: ", date.getDate() + '/' + (date.getMonth() + 1 ) + '/' + date.getFullYear() );
+    }
+
+    // *********************************************************
     function copyShipment( evento ){
-        
         if(evento.target.nodeName === 'I' && evento.target.classList.contains("copy-ship") ){
             
             document.querySelectorAll('label.copy-shipment').forEach( elem => {
                 elem.classList.remove("copy-shipment");
             });
-
+            
             const element = evento.target;
             element.parentNode.classList.add("copy-shipment");
 
-            copyElement( element.parentNode.parentNode.nextSibling );
+            copyElement( element.parentNode.parentNode.nextSibling.firstChild );
+            // copyElement( element.parentNode.parentNode.nextSibling );
 
             /*
             setTimeout( () => {
@@ -337,6 +457,8 @@ let shipmentsArrayMap = new Map();
     // Function to 'copy' a DOM node into the clipboard. 
     function copyElement( element ){
         console.log("Copy ELEMENT: ", element);
+
+        // element.innerText = element.innerText.trim();
         
         // clear all selection made before
         window.getSelection().removeAllRanges();

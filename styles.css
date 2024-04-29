@@ -81,6 +81,16 @@ div.start-panel {
 	height: var(--height-data);
 }
 
+.container-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-column {
+    display: flex;
+    flex-direction: column;
+}
+
 /* ***** INITIAL SCREEN BOXES STYLES END ***** */
 
 /* ***** LOADING FRAME ***** */
@@ -103,7 +113,7 @@ div.loading-frame div.loading {
     max-width: 40%;
     margin : auto;
     top: 50%;
-	padding: 2rem ;
+	/* padding: 2rem ; */
     border-radius: 5px;
     transform: translate(-0%, -50%);
     -webkit-transform: translate(-0%, -50%);
@@ -114,6 +124,39 @@ div.loading p {
     font-weight: bold;
     font-size: 1.5em;
 }
+
+h3.add-shipping-title {
+    background-color: var(--second-color);
+    padding: 1em 0em;
+    color: var(--first-color);
+}
+
+div.add-shipping-content {
+    padding: 0.5em;
+}
+
+div.add-shipping-content label {
+    text-align: left;
+    margin: 0.3em;
+}
+
+div.add-shipping-content div {
+    justify-content: space-between;
+}
+
+div.add-shipping-content div input {
+    width: 45%;
+    text-align: center;
+}
+
+div.add-shipping-buttons {
+    padding: 0.5em 0 0.2em 0; 
+}
+
+div.add-shipping-buttons button {
+    border: 1px solid var(--second-color);
+}
+
 
 /* ***** LOADING FRAME END ***** */
 
@@ -151,7 +194,11 @@ h5.version {
     text-align: right;
     padding: 0 1em;
     font-weight: lighter;
-    /* font-size: 0.7em; */
+}
+
+a {
+    font-weight: bolder;
+    text-decoration: none;
 }
 
 .contact {
@@ -185,7 +232,7 @@ div.content {
         background-color: var(--first-color);
         color: var(--second-color);
         font-weight: bold;
-        padding: 0.5em;
+        padding: 0.4em;
     }
 
     table tbody#shipments tr:hover {
@@ -238,6 +285,19 @@ div.content {
     table tbody#shipments tr.plants {
         background-color: var(--warning-color);
     }
+    
+    span svg {
+        vertical-align: text-bottom;
+        width: 1.2em;
+    }
+
+    span:hover svg {
+        background-color: var(--second-color);
+    }
+    
+    span:hover svg g {
+        fill: var(--first-color);
+    }
 
     /* ***** SECTIONS AND CONTENT - Shipments Commands ***** */
 
@@ -247,7 +307,7 @@ div.content {
     }
     
     div.content div.element div.shipments-commands p {
-        margin-bottom: 0.3em;
+        margin-bottom: 0.5em;
     }
 
     div.content div.element div.shipments-commands fieldset  {
@@ -290,6 +350,7 @@ div.content {
         height: 15em;
         width: 12em;
         cursor: pointer;
+        margin: auto;
     }
 
     div.element div.card:hover {
@@ -319,6 +380,11 @@ div.content {
     
     div.element div.card:hover div.card-content i {
         color: var(--second-color);
+    }
+
+    a.macro-link {
+        padding-top: 2em;
+        background-color: red;
     }
 
 /* ***** 2th PART REPORT CONTENT - Panel frame ***** */

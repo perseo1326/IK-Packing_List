@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,26 @@
                 <p id="loading">Cargando...</p>
             </div>
         </div>
+
+        <!-- Panel add manual shipping -->
+        <div class="loading-frame no-visible" id="add-manual-shipping-frame">
+            <div class="loading container-column">
+                <h3 class="add-shipping-title">Agregar shippment manualmente</h3>
+                <div class="container-column add-shipping-content">
+                    <label for="shipment-id">Shipment ID</label>
+                    <input type="text" name="shipment-id" id="shipment-id" autofocus required>
+                    <label for="shipment-date">Fecha - Hora</label>
+                    <div class="container-row">
+                        <input type="date" name="shipment-date" id="shipment-date" required>
+                        <input type="time" name="shipment-time" id="shipment-time" required>
+                    </div>
+                    <div class="container-row add-shipping-buttons">
+                        <button id="add-manual-ship-ok-b" class="custom-button">Agregar</button>
+                        <button id="add-manual-ship-cancel-b" class="custom-button">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="container-title">
             <div class="title">
@@ -30,8 +50,11 @@
 
                 <!-- Button load file -->
                 <div id="button-load-shipments" class="element">
-                        <label id="shipments-data-label" class="custom-button" for="shipments-data">Información de Shipments</label>
-                        <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
+                    <a id="ITMS-link" href="#" target="_blank">
+                        <button class="custom-button">1. Abrir ITMS...</button>
+                    </a>
+                    <label id="shipments-data-label" class="custom-button" for="shipments-data"></label>
+                    <input type="file" name="shipments-data" id="shipments-data" class="no-visible">
                 </div>
 
                 <div id="shipments-container" class="element no-visible">
@@ -39,7 +62,9 @@
                         <tr class="">
                             <th>No.</th>
                             <th>Copiar</th>
-                            <th>Shipment ID</th>
+                            <th>Shipment ID <span id="add-manual-shipping">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="24px" height="24px"><g fill="#ffdb01" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M12,2c-5.511,0 -10,4.489 -10,10c0,5.511 4.489,10 10,10c5.511,0 10,-4.489 10,-10c0,-5.511 -4.489,-10 -10,-10zM12,4c4.43012,0 8,3.56988 8,8c0,4.43012 -3.56988,8 -8,8c-4.43012,0 -8,-3.56988 -8,-8c0,-4.43012 3.56988,-8 8,-8zM11,7v4h-4v2h4v4h2v-4h4v-2h-4v-4z"></path></g></g></svg>
+                            </span></th>
                             <th>Estimated Arrival Date</th>
                             <th>Código</th>
                             <th>Selección</th>
@@ -61,7 +86,13 @@
                         <button id="shipments-clear" class="custom-button">Limpiar Selección</button>
                     </div>
                     <div class="report-load">
-                        <label id="" class="custom-button" for="report-load"><strong>Continuar</strong><br> Cargar Reporte 'OR130'</label>
+                        <a id="receiving-link" href="#" target="_blank">
+                            <button class="custom-button">Gestor de Entregas...</button>
+                        </a>
+                        <a class="" id="FMS_OR130A_link" href="#" target="_blank">
+                            <button id="" class="custom-button">Abrir FMS Auto Exporter...</button>
+                        </a>
+                        <label id="load-OR130A-report" class="custom-button" for="report-load"><strong>Continuar</strong><br> Cargar Reporte 'OR130'</label>
                         <input type="file" name="report-load" id="report-load" class="no-visible">
                     </div>
                 </div>
@@ -80,6 +111,11 @@
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
                         </div>
+                        <div class="">
+                            <a href="#" class="macro-link" target="_blank">
+                                <button id="esbo-order" class="custom-button">Herramienta Pedidos ESBO</button>
+                            </a>
+                        </div>
                     </div>
                     
                     <!-- Card for OR130 Report -->
@@ -92,6 +128,11 @@
                             <div class="card-content">
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
+                        </div>
+                        <div class="">
+                            <a href="#" class="macro-link" target="_blank">
+                                <button id="inflow-load" class="custom-button">Herramienta Cargas Inflow</button>
+                            </a>
                         </div>
                     </div>
                 </div>

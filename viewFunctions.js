@@ -10,8 +10,9 @@ const CSS_CLASS_ARRAY = [ "_1000", "_2000", "_3000" ];
 
 function showShipmentsData( shipmentsDataMap ){
     
-    shipmentsTotal.innerText = shipmentsDataMap.size;
+    document.getElementById("shipments-total").innerText = shipmentsDataMap.size;
 
+    const dataTable = document.getElementById("shipments");
     dataTable.innerHTML = "";
     let html = "";
     let count = 1;
@@ -33,7 +34,9 @@ function showShipmentsData( shipmentsDataMap ){
         html += "</td>";
 
         html += "<td>";
+        html += "<p>"
         html += key;
+        html += "</p>"
         html += "</td>";
 
         html += "<td class='centrar'>";
@@ -55,7 +58,35 @@ function showShipmentsData( shipmentsDataMap ){
         html += "</tr>";
         count++;
     });
+    
+    countDayCode(shipmentsDataMap);
     dataTable.innerHTML = html;
+}
+
+
+// *********************************************************
+function countDayCode(map){
+    
+    let codeFirst = codeSecond = codeThird = 0;
+    map.forEach( ( row, key ) => {
+
+        switch (row.code) {
+            case CODE_FIRST:
+                codeFirst++;
+                break;
+            case CODE_SECOND:
+                codeSecond++;
+                break;
+            case CODE_THIRD:
+                codeThird++;
+                break;
+            default:
+                break;
+        }
+    });
+    shipmentsFirst.innerText = (CODE_FIRST + " = " + codeFirst);
+    shipmentsSecond.innerText = (CODE_SECOND + " = " + codeSecond);
+    shipmentsThird.innerText = (CODE_THIRD + " = " + codeThird);
 }
 
 
