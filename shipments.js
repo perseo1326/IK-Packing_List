@@ -109,7 +109,7 @@ let shipmentsArrayMap = new Map();
         document.getElementById("title").innerText = document.title = titleMain;
         loadFileLabel.innerText = "Información de Shipments";
         
-        footerVersion.innerText = "Versión " + VERSION + footerVersion.innerText;
+        footerVersion.innerHTML = "Versión " + VERSION + " - " + footerVersion.innerHTML;
         shipmentsData = new Map();
         shipmentsArrayMap = new Map();
     }
