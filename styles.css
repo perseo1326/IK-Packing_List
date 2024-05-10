@@ -182,6 +182,11 @@ div.add-shipping-buttons button {
     border: 1px solid var(--first-color);
 }
 
+#shipments-remove {
+    background-color: var(--warning-color);
+    color: var(--background);
+}
+
 /* ***** BUTTON STYLES END ***** */
 
 h1 {
