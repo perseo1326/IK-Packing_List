@@ -2,6 +2,8 @@
 
 Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado a las necesidades de GALEX.
 
+Abrir aplicación: [IK-Packing_list_V1](https://perseo1326.github.io/IK-Packing_List/IK-Packing_list_V1.html)
+
 ### Version 1.5.5
 * Agregados enlaces para abrir las ubicaciones de las macros de Excel para la herramienta de pedidos a ESBO y la herramienta de propuesta de carga para Inflow.
 
