@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.5.6";
+const VERSION = "1.5.7";
 
 // External links
 const titleMain = "Generador Packing List - GALEX";
@@ -273,14 +273,20 @@ let shipmentsArrayMap = [];
         const arrayData = [];
         
         for (let index = 0; index < grossDataArray.length; index++) {
-            
+
             const row = grossDataArray[ index ];
             const rowPlusOne = grossDataArray[ index + 1 ];
             
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
                 
+                console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
                 // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
                 // from the next row because in the actual row it is not present. Excel bug!
+                // However, sometimes and somebody do some manual changes and that empty cell is fill and the one below is empty
+                // for that reason get an undefined error!
+                if(rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] == undefined ){
+                    rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] = row[ESTIMATE_ARRIVAL_DATE.columnNumber];
+                }
                 const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
                 arrayData.push( truckInfoRow );
             }

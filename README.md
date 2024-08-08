@@ -4,6 +4,9 @@ Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado
 
 Abrir aplicación: [IK-Packing_list_V1](https://perseo1326.github.io/IK-Packing_List/IK-Packing_list_V1.html)
 
+### Version 1.5.7
+* Reparado error cuando el Excel tiene modificación manual y generaba una celda vacía.
+
 ### Version 1.5.6
 * Actualizacion en los enlaces de sitios web enlazados.
 
