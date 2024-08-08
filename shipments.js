@@ -19,14 +19,15 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.5.5";
+const VERSION = "1.5.6";
 
+// External links
 const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
 const titleReportData = "Reporte OR130 - Reducido";
 const ITMS_LINK = "https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP";
 const FMS_AUTO_EXPORTER_OR130A = "https://exporter.fms-reporting.ingka.com/schedules/6182";
-const RECEIVING_LINK = "https://mhs406.ikea.com/sgf/receiving";
+const RECEIVING_LINK = "https://mhs-406.ikea.com/sgf/receiving";
 const SHIPMENTS_INFO_BUTTON = "2. Información de Shipments";
 const EXCEL_FILE_PEDIDOS_TOOL = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20PEDIDOS%2023.11.xlsm?d=wabe1a4e6617544bd8a833e3134fbfe21&csf=1&web=1&e=6CswHv";
 const EXCEL_FILE_CARGAS_INFLOW = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20CARGAS%20INFLOW%2023.7.xlsm?d=w6d69e3a9ecb9404d96303b15f4c525ff&csf=1&web=1&e=WdwZ6I";
