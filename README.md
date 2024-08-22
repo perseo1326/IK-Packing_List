@@ -8,7 +8,8 @@ Abrir aplicación: [IK-Packing_list_V1](https://perseo1326.github.io/IK-Packing_
 
 * Cambio de columna de toma de información de la fuente de datos, pasando de leer la columna "Estimated Arrival" a la columna "Appointment Window Start".
 * Implementada ordenación automática al visualizar la tabla de shipments.
-* Mejora visual para identificar shipments manuales agregados.
+* Mejora visual para identificar shipments agregados manualmente.
+* Mejora visual para el botón de agregar shipments manuales.
 
 ### Version 1.5.7
 

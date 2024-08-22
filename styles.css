@@ -294,18 +294,32 @@ div.content {
     table tbody#shipments tr.plants {
         background-color: var(--warning-color);
     }
-    
+
+    table th.add-manual-shipping {
+        background-color: var(--second-color);
+        color: var(--first-color);
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    table th.add-manual-shipping:hover {
+        background-color: var(--first-color);
+        color: var(--second-color);
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
     span svg {
         vertical-align: text-bottom;
         width: 1.2em;
     }
-
-    span:hover svg {
-        background-color: var(--second-color);
+    
+    span svg g {
+        fill: var(--first-color);
     }
     
-    span:hover svg g {
-        fill: var(--first-color);
+    table th.add-manual-shipping:hover span svg g {
+        fill: var(--second-color);
     }
 
     /* ***** SECTIONS AND CONTENT - Shipments Commands ***** */
