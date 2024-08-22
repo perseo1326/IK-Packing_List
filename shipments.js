@@ -19,7 +19,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.5.7";
+const VERSION = "1.5.8";
 
 // External links
 const titleMain = "Generador Packing List - GALEX";
@@ -47,7 +47,8 @@ const CODE_THIRD = 3000;
 // Column name and "number of column"
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
 const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
-const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival", columnNumber : "" };
+// const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival", columnNumber : "" };
+const APPOINMENT_WINDOW_START = { colName : "Appointment Window Start", columnNumber : "" };
 
 const BUTTON_CODE_FIRST = "FIRST";
 const BUTTON_CODE_SECOND = "SECOND";
@@ -246,10 +247,12 @@ let shipmentsArrayMap = [];
                         receiver = true;
                     }
                     
-                    if ( element === ESTIMATE_ARRIVAL_DATE.colName ) {
+                    // if ( element === ESTIMATE_ARRIVAL_DATE.colName ) {
+                    if ( element === APPOINMENT_WINDOW_START.colName ) {
                         
                         if(isfirstAppearance){
-                            ESTIMATE_ARRIVAL_DATE.columnNumber = cell;
+                            // ESTIMATE_ARRIVAL_DATE.columnNumber = cell;
+                            APPOINMENT_WINDOW_START.columnNumber = cell;
                             // console.log("Encontrado TERCER encabezado: ", element, ESTIMATE_ARRIVAL_DATE);
                             estimatedArrivalDate = true;
                         }
@@ -257,7 +260,8 @@ let shipmentsArrayMap = [];
                     }
 
                     if( shopCode && shipmentId && receiver && estimatedArrivalDate ) {
-                        console.log("Columnas encontradas: ", SHIPMENT_COL, RECEIVER_COL, ESTIMATE_ARRIVAL_DATE );
+                        // console.log("Columnas encontradas: ", SHIPMENT_COL, RECEIVER_COL, ESTIMATE_ARRIVAL_DATE );
+                        console.log("Columnas encontradas: ", SHIPMENT_COL, RECEIVER_COL, APPOINMENT_WINDOW_START );
                         return grossExcelData;
                     }
                 }
@@ -275,19 +279,21 @@ let shipmentsArrayMap = [];
         for (let index = 0; index < grossDataArray.length; index++) {
 
             const row = grossDataArray[ index ];
-            const rowPlusOne = grossDataArray[ index + 1 ];
+            // const rowPlusOne = grossDataArray[ index + 1 ];
             
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
                 
-                console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+                // console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+                console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", row[APPOINMENT_WINDOW_START.columnNumber]);
                 // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
                 // from the next row because in the actual row it is not present. Excel bug!
                 // However, sometimes and somebody do some manual changes and that empty cell is fill and the one below is empty
                 // for that reason get an undefined error!
-                if(rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] == undefined ){
-                    rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] = row[ESTIMATE_ARRIVAL_DATE.columnNumber];
-                }
-                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+                // if(rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] == undefined ){
+                //     rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] = row[ESTIMATE_ARRIVAL_DATE.columnNumber];
+                // }
+                // const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
+                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[APPOINMENT_WINDOW_START.columnNumber]);
                 arrayData.push( truckInfoRow );
             }
         }
