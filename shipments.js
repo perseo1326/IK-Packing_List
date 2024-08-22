@@ -3,16 +3,16 @@
 
 class TruckInfo {
 
-    constructor (shipmentId, estimatedArrival ){
+    constructor (shipmentId, dateTimeValue ){
         this.shipmentId = shipmentId.trim();
-        this.arrivalText(estimatedArrival.trim());
+        this.setDateTimeText(dateTimeValue.trim());
     }
 
-    arrivalText ( text ){
+    setDateTimeText ( text ){
         const data = text.split(" ");
         const splitDate = data[0].split('/');
         const splitTime = data[1].split(':');
-        this.estimatedArrivalDate = new Date( splitDate[2], (splitDate[1] - 1), splitDate[0], splitTime[0], splitTime[1] );
+        this.dateTimeShipment = new Date( splitDate[2], (splitDate[1] - 1), splitDate[0], splitTime[0], splitTime[1] );
         this.isPlants = (splitTime[0] == 10 ? true : false );
         this.code = 0;
     }
@@ -191,15 +191,13 @@ let shipmentsArrayMap = [];
 
             contentData = getShipmentsInfoFromGrossData( contentData );
 
-            contentData = sortTrucksInfo(contentData);
-
             document.getElementById("button-load-shipments").classList.add("no-visible");
             document.getElementById("shipments-container").classList.remove("no-visible");
             document.getElementById("shipments-commands").classList.remove("no-visible");
             document.getElementById("box").classList.remove("box");
 
             shipmentsData = arrayToMap( contentData );
-
+            
             showShipmentsData(shipmentsData);
         })
         .catch( (error) => {
@@ -283,7 +281,6 @@ let shipmentsArrayMap = [];
             
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
                 
-                // console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
                 console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", row[APPOINMENT_WINDOW_START.columnNumber]);
                 // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
                 // from the next row because in the actual row it is not present. Excel bug!
@@ -292,7 +289,6 @@ let shipmentsArrayMap = [];
                 // if(rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] == undefined ){
                 //     rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] = row[ESTIMATE_ARRIVAL_DATE.columnNumber];
                 // }
-                // const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber]);
                 const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[APPOINMENT_WINDOW_START.columnNumber]);
                 arrayData.push( truckInfoRow );
             }
@@ -301,16 +297,7 @@ let shipmentsArrayMap = [];
         return arrayData;
     }
     
-    // *********************************************************
-    function sortTrucksInfo( arrayData ){
-
-        arrayData.sort( ( a, b ) => {
-            return ( a.estimatedArrivalDate.getTime() < b.estimatedArrivalDate.getTime() ? -1 : 1 );
-        });
-        return arrayData;
-    }
-
-    // *********************************************************
+     // *********************************************************
     function arrayToMap( arrayData ) {
 
         let dataMap = new Map();
@@ -372,7 +359,7 @@ let shipmentsArrayMap = [];
                 default:
                     console.log("WARNING:validateSelectionShipments: Existen shipments sin asignar código.");
                     isValid = false;
-    }
+            }
         });
         if(!isValid){
             return undefined;
@@ -397,7 +384,6 @@ let shipmentsArrayMap = [];
             }
 
             // validate the shipping ID is not already present 
-            // TODO: validar esto
             if(shipmentsData.has(shipmentId)){
                 addShipmentId.value = "";
                 throw new Error("El Shipment ID ya existe en el listado, pruebe removerlo y agregarlo.");

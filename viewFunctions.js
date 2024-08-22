@@ -17,12 +17,14 @@ function showShipmentsData( shipmentsDataMap ){
     let html = "";
     let count = 1;
 
-    shipmentsDataMap.forEach( ( row, key ) => {
+    const arraySorted = sortShipmentsDataMap( shipmentsDataMap );
+
+    arraySorted.forEach( ( shipmentElement ) => {
         
-        const codeClass = "_" + row.code;
+        const codeClass = "_" + shipmentElement.code;
 
         html += "<tr class='" + codeClass;
-        html += row.isPlants ? " plants" : "";
+        html += shipmentElement.isPlants ? " plants" : "";
         html += "'>";
 
         html += "<td class='centrar'>";
@@ -35,23 +37,23 @@ function showShipmentsData( shipmentsDataMap ){
 
         html += "<td>";
         html += "<p>"
-        html += key;
+        html += shipmentElement.shipmentId;
         html += "</p>"
         html += "</td>";
 
         html += "<td class='centrar'>";
-        html += row.estimatedArrivalDate.toLocaleString();
+        html += shipmentElement.dateTimeShipment.toLocaleString();
         html += "</td>";
         
         html += "<td class='centrar'>";
-        html += row.code;
+        html += shipmentElement.code;
         html += "</td>";
         
         html += "<td class='selection'>";
-        html += '<input type="checkbox" id="' + key + '" class="no-visible" value="';
+        html += '<input type="checkbox" id="' + shipmentElement.shipmentId + '" class="no-visible" value="';
         html += "index";
         html += '" />';
-        html += '<label for="' + key;
+        html += '<label for="' + shipmentElement.shipmentId;
         html += '"><i class="fa-regular fa-circle-check"></i></label>';
         html += "</td>";
 
@@ -61,6 +63,21 @@ function showShipmentsData( shipmentsDataMap ){
     
     countDayCode(shipmentsDataMap);
     dataTable.innerHTML = html;
+}
+
+
+    // *********************************************************
+    function sortShipmentsDataMap( data ){
+
+    const array = [];
+    for (const element of data.values() ) {
+        array.push( element );
+    }
+
+    array.sort( ( a, b ) => {
+        return ( a.dateTimeShipment.getTime() < b.dateTimeShipment.getTime() ? -1 : 1 );
+    });
+    return array;
 }
 
 
