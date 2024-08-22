@@ -1,7 +1,7 @@
 
 
 * {
-    --background: white;
+    --background-color: white;
     --first-color: #0057a4;
     --second-color: #ffdb01;
     --warning-color: rgba(255, 52, 52, 0.8);
@@ -184,7 +184,7 @@ div.add-shipping-buttons button {
 
 #shipments-remove {
     background-color: var(--warning-color);
-    color: var(--background);
+    color: var(--background-color);
 }
 
 /* ***** BUTTON STYLES END ***** */
@@ -230,7 +230,7 @@ div.content {
     table {
         width: 100%;
         border-collapse: collapse;
-        background-color: var(--background);
+        background-color: var(--background-color);
     }
 
     table tr th {
@@ -264,9 +264,13 @@ div.content {
     }
     
     table tbody#shipments tr:hover td.selection  {
-        background-color: var(--background);
+        background-color: transparent;
     }
     
+    table tbody#shipments tr.manual {
+        font-weight: bolder;
+    }
+
     table tbody#shipments tr td.selection label {
         text-align: center;
         display: block;

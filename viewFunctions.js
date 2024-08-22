@@ -21,7 +21,7 @@ function showShipmentsData( shipmentsDataMap ){
 
     arraySorted.forEach( ( shipmentElement ) => {
         
-        const codeClass = "_" + shipmentElement.code;
+        const codeClass = "_" + shipmentElement.code + ( shipmentElement.manualShipment ? " manual" : "" );
 
         html += "<tr class='" + codeClass;
         html += shipmentElement.isPlants ? " plants" : "";

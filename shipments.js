@@ -3,9 +3,11 @@
 
 class TruckInfo {
 
-    constructor (shipmentId, dateTimeValue ){
+    constructor (shipmentId, dateTimeValue, isManual ){
         this.shipmentId = shipmentId.trim();
         this.setDateTimeText(dateTimeValue.trim());
+        this.code = 0;
+        this.manualShipment = isManual;
     }
 
     setDateTimeText ( text ){
@@ -13,8 +15,7 @@ class TruckInfo {
         const splitDate = data[0].split('/');
         const splitTime = data[1].split(':');
         this.dateTimeShipment = new Date( splitDate[2], (splitDate[1] - 1), splitDate[0], splitTime[0], splitTime[1] );
-        this.isPlants = (splitTime[0] == 10 ? true : false );
-        this.code = 0;
+        this.isPlants = (splitTime[0] === '10' ? true : false );
     }
 }
 
@@ -47,7 +48,6 @@ const CODE_THIRD = 3000;
 // Column name and "number of column"
 const SHIPMENT_COL = { colName : "Shipment ID", columnNumber : "" } ;
 const RECEIVER_COL = { colName : "Receiver", columnNumber : "" };
-// const ESTIMATE_ARRIVAL_DATE = { colName : "Estimated Arrival", columnNumber : "" };
 const APPOINMENT_WINDOW_START = { colName : "Appointment Window Start", columnNumber : "" };
 
 const BUTTON_CODE_FIRST = "FIRST";
@@ -282,14 +282,7 @@ let shipmentsArrayMap = [];
             if( row[RECEIVER_COL.columnNumber] === SHOP_CODE_ID ){
                 
                 console.log("Shipment: ", row[SHIPMENT_COL.columnNumber ], ", Date: ", row[APPOINMENT_WINDOW_START.columnNumber]);
-                // Because the spreed sheet format is not correctly, I need to read the "Arrival Date" 
-                // from the next row because in the actual row it is not present. Excel bug!
-                // However, sometimes and somebody do some manual changes and that empty cell is fill and the one below is empty
-                // for that reason get an undefined error!
-                // if(rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] == undefined ){
-                //     rowPlusOne[ESTIMATE_ARRIVAL_DATE.columnNumber] = row[ESTIMATE_ARRIVAL_DATE.columnNumber];
-                // }
-                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[APPOINMENT_WINDOW_START.columnNumber]);
+                const truckInfoRow = new TruckInfo( row[SHIPMENT_COL.columnNumber ], row[APPOINMENT_WINDOW_START.columnNumber], false );
                 arrayData.push( truckInfoRow );
             }
         }
@@ -406,7 +399,7 @@ let shipmentsArrayMap = [];
 
             const dateTimeString = ( shipmentDate + " " + addShipmentTime.value.trim());
 
-            const truckInfoRow = new TruckInfo( shipmentId, dateTimeString);
+            const truckInfoRow = new TruckInfo( shipmentId, dateTimeString, true );
             
             shipmentsData.set( truckInfoRow.shipmentId, truckInfoRow );
             addManualShipCancelB.click();
