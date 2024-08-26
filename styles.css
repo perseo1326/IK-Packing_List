@@ -44,6 +44,13 @@
     text-align: center;
 }
 
+.centrar-vertical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+}
+
 .align-left {
     text-align: left;
 }
@@ -89,6 +96,11 @@ div.start-panel {
 .container-column {
     display: flex;
     flex-direction: column;
+    justify-content: space-around; 
+}
+
+.element {
+    /* background-color: green; */
 }
 
 /* ***** INITIAL SCREEN BOXES STYLES END ***** */
@@ -220,7 +232,7 @@ div.content {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+    /* align-items: center; */
     height: 100%;
     overflow-y: auto;
 }
@@ -231,6 +243,7 @@ div.content {
         width: 100%;
         border-collapse: collapse;
         background-color: var(--background-color);
+        margin-bottom: 1em;
     }
 
     table tr th {
@@ -296,37 +309,34 @@ div.content {
     }
 
     table th.add-manual-shipping {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    table th.add-manual-shipping:hover {
         background-color: var(--second-color);
         color: var(--first-color);
         cursor: pointer;
         text-decoration: underline;
     }
 
-    table th.add-manual-shipping:hover {
-        background-color: var(--first-color);
-        color: var(--second-color);
-        cursor: pointer;
-        text-decoration: underline;
-    }
-
     span svg {
         vertical-align: text-bottom;
-        width: 1.2em;
+        height: 24px;
+        width: auto;
     }
-    
+
     span svg g {
-        fill: var(--first-color);
+        fill: var(--second-color);
     }
     
-    table th.add-manual-shipping:hover span svg g {
-        fill: var(--second-color);
+    table th.add-manual-shipping:hover span svg g, button:hover span svg g {
+        fill: var(--first-color);
     }
 
     /* ***** SECTIONS AND CONTENT - Shipments Commands ***** */
 
-
     div.content div.element div.shipments-commands {
-        padding: 0.2em;
     }
     
     div.content div.element div.shipments-commands p {
@@ -355,7 +365,7 @@ div.content {
     /* ***** SECTIONS AND CONTENT - Report OR130  ***** */
 
     div.report-load {
-        margin-top: 2em;
+        /* margin: 0.5em; */
     }
 
 /* ***** SECTIONS AND CONTENT END ***** */

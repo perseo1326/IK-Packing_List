@@ -85,7 +85,7 @@ copyReportButton.addEventListener('click', () => {
     // *********************************************************
     // *********************************************************
     // Function to read a selected file
-    function openReportFile(evento) {
+    function openReportFile( evento ) {
         try {
             // validate the user selection for the shipments
             shipmentsArrayMap = [];
@@ -93,14 +93,11 @@ copyReportButton.addEventListener('click', () => {
             
             console.log("RESULTADO: ", shipmentsArrayMap);
             
-            
             if(shipmentsArrayMap === undefined){
                 console.log("ERROR:validateSelectionShipments: Por favor revise su selección de shipments y elimine los que no use.");
-                // alert("Por favor revise su selección de shipments y elimine los que no use.");
                 reportLoadButton.value = "";
                 evento.stopPropagation();
                 throw new Error("Por favor revise su selección de shipments y elimine los que no use.");
-                return;
             }
             
             const file = evento.target.files[0];

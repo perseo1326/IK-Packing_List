@@ -20,7 +20,7 @@ class TruckInfo {
 }
 
 
-const VERSION = "1.5.8";
+const VERSION = "1.6.1";
 
 // External links
 const titleMain = "Generador Packing List - GALEX";

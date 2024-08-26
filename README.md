@@ -4,7 +4,11 @@ Aplicación para generar el packing list y un resumen del Reporte OR130 adaptado
 
 Abrir aplicación: [IK-Packing_list_V1](https://perseo1326.github.io/IK-Packing_List/IK-Packing_list_V1.html)
 
-### Version 1.5.8
+### Version 1.6.1
+
+* Agregados botones de navegación para regresar a la vista previa de camiones.
+
+### Version 1.6
 
 * Cambio de columna de toma de información de la fuente de datos, pasando de leer la columna "Estimated Arrival" a la columna "Appointment Window Start".
 * Implementada ordenación automática al visualizar la tabla de shipments.
