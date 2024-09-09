@@ -27,7 +27,7 @@ const titleMain = "Generador Packing List - GALEX";
 const titlePackingListData = "Packing List - Listado";
 const titleReportData = "Reporte OR130 - Reducido";
 const ITMS_LINK = "https://itm-vis.ikea.com/GC3/glog.webserver.report.ReportParameterServlet?ct=NDY3NDA4MzMwOTg1MjY3MjE0NQ%3D%3D&report_gid=I.IKEA_VISIB_DELIVERIES&DB=OLTP";
-const FMS_AUTO_EXPORTER_OR130A = "https://exporter.fms-reporting.ingka.com/schedules/6182";
+const FMS_AUTO_EXPORTER_OR130A = "https://exporter.fms-reporting.ingka.com/schedules/55634";
 const RECEIVING_LINK = "https://mhs-406.ikea.com/sgf/receiving";
 const SHIPMENTS_INFO_BUTTON = "2. Información de Shipments";
 const EXCEL_FILE_PEDIDOS_TOOL = "https://iweof.sharepoint.com/:x:/r/teams/o365g_sss_retes406/Shared%20Documents/EXTERNO/Rutinas/!HERRAMIENTA%20DE%20PEDIDOS%2023.11.xlsm?d=wabe1a4e6617544bd8a833e3134fbfe21&csf=1&web=1&e=6CswHv";
